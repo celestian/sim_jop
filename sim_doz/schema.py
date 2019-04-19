@@ -53,6 +53,8 @@ def create_schema(source_file):
         if 'name' in data['area']:
             elements[data['area']['name']] = Area(data['area'])
 
+    # TODO: load also meta data
+
     if 'district' in data:
         for item in data['district']:
             elements[item['name']] = District(item)
@@ -73,4 +75,44 @@ def create_schema(source_file):
         for item in data['track']:
             elements[item['name']] = Track(item)
 
-    print(yaml.dump(elements))
+    # integrity check
+    keys = list(elements.keys())
+    for key in keys:
+        element = elements[key]
+
+        if type(element) in (Entrypoint, Junction, Signal):
+            if element.district not in keys:
+                print(
+                    'ERROR: {} missing district element {}.'.format(
+                        element.name, element.district))
+                exit(0)
+
+        if type(element) in (Junction, Signal):
+            if element.facing not in keys:
+                print(
+                    'ERROR: {} missing facing element {}.'.format(
+                        element.name, element.facing))
+                exit(0)
+            if element.trailing not in keys:
+                print(
+                    'ERROR: {} missing trailing element {}.'.format(
+                        element.name, element.trailing))
+                exit(0)
+        if isinstance(element, Junction):
+            if element.sidding not in keys:
+                print(
+                    'ERROR: {} missing sidding element {}.'.format(
+                        element.name, element.sidding))
+                exit(0)
+
+    # create connections
+    new_elements = []
+    for key in keys:
+        element = elements[key]
+        if type(element) in (Entrypoint, Junction, Signal):
+            element.district = elements[element.district]
+        if type(element) in (Junction, Signal):
+            element.facing = elements[element.facing]
+            element.trailing = elements[element.trailing]
+        if isinstance(element, Junction):
+            element.sidding = elements[element.sidding]
