@@ -239,7 +239,7 @@ signal:
   facing: "kolej 2"
   trailing: "15"
 - name: "L 3"
-  distance: 193.735
+  distance: 192.735
   district: "žst 2"
   type: "odjezdové"
   facing: "kolej 3"
