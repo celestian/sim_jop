@@ -12,12 +12,20 @@ district:
 entrypoint:
 - name: "z Grygova"
   district: "žst 2"
+  connection: "1 S"
+  direction_type: "in"
 - name: "do Grygova"
   district: "žst 2"
+  connection: "2 S"
+  direction_type: "out"
 - name: "z Dluhonic"
   district: "žst 1"
+  connection: "2 L"
+  direction_type: "in"
 - name: "do Dluhonic"
   district: "žst 1"
+  connection: "1 L"
+  direction_type: "out"
 junction:
 - name: "1"
   distance: 191.523
