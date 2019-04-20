@@ -4,6 +4,7 @@ import yaml
 import json
 
 from sim_doz.railway.elements import Area, Meta, District, Entrypoint, Junction, Signal, Track
+from sim_doz.railway.schema import Schema
 
 
 def prepare_schema(output_file):
@@ -44,16 +45,18 @@ def prepare_schema(output_file):
 
 def create_schema(source_file):
 
+    area = None
+    meta = None
     elements = {}
 
     with open(source_file, 'r') as source:
         data = yaml.safe_load(source)
 
     if 'area' in data:
-        if 'name' in data['area']:
-            elements[data['area']['name']] = Area(data['area'])
+        area = Area(data['area'])
 
-    # TODO: load also meta data
+    if 'meta' in data:
+        meta = Meta(data['meta'])
 
     if 'district' in data:
         for item in data['district']:
@@ -116,3 +119,7 @@ def create_schema(source_file):
             element.trailing = elements[element.trailing]
         if isinstance(element, Junction):
             element.sidding = elements[element.sidding]
+
+    schema = Schema(area, meta, elements)
+    print(yaml.dump(schema))
+    print('distance (min, max) = {}'.format(schema.get_size()))

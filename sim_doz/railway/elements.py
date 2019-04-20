@@ -163,11 +163,11 @@ class Meta(yaml.YAMLObject):
     yaml_tag = u'!Meta'
     yaml_flow_style = False
 
-    def __init__(self, author, email, date, version):
-        self.author = author
-        self.email = email
-        self.date = date
-        self.version = version
+    def __init__(self, data):
+        self.author = data['author']
+        self.email = data['email']
+        self.date = data['date']
+        self.version = data['version']
 
     @staticmethod
     def get_template(is_array):
