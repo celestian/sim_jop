@@ -43,6 +43,12 @@ entrypoint_structure = [
     }, {
         'label': 'district',
         'type': str,
+    }, {
+        'label': 'connection',
+        'type': str,
+    }, {
+        'label': 'direction_type',
+        'type': str,
     },
 ]
 
@@ -189,6 +195,8 @@ class Entrypoint(yaml.YAMLObject):
     def __init__(self, data):
         self.name = data['name']
         self.district = data['district']
+        self.connection = data['connection']
+        self.direction_type = data['direction_type']
 
     @staticmethod
     def get_template(is_array):

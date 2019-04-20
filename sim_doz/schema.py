@@ -80,6 +80,13 @@ def create_schema(source_file):
     for key in keys:
         element = elements[key]
 
+        if isinstance(element, Entrypoint):
+            if element.connection not in keys:
+                print(
+                    'ERROR: {} missing connection element {}.'.format(
+                        element.name, element.connection))
+                exit(0)
+
         if type(element) in (Entrypoint, Junction, Signal):
             if element.district not in keys:
                 print(
@@ -106,12 +113,13 @@ def create_schema(source_file):
                 exit(0)
 
     # create connections
-    new_elements = []
     for key in keys:
         element = elements[key]
-        if type(element) in (Entrypoint, Junction, Signal):
+        if isinstance(element, Entrypoint):
+            element.connection = elements[element.connection]
+        if isinstance(element, (Entrypoint, Junction, Signal)):
             element.district = elements[element.district]
-        if type(element) in (Junction, Signal):
+        if isinstance(element, (Junction, Signal)):
             element.facing = elements[element.facing]
             element.trailing = elements[element.trailing]
         if isinstance(element, Junction):
