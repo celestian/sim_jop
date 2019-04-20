@@ -80,7 +80,7 @@ junction:
   district: "žst 2"
   type: "p"
   orientation: 5
-  facing: "16"
+  facing: "Se 11"
   trailing: "L 1"
   sidding: "L 3"
 - name: "15"
@@ -88,7 +88,7 @@ junction:
   district: "žst 2"
   type: "l"
   orientation: 5
-  facing: "17"
+  facing: "Se 12"
   trailing: "L 2"
   sidding: "L 4"
 - name: "16"
