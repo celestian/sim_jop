@@ -79,37 +79,29 @@ def create_schema(source_file):
     keys = list(elements.keys())
     for key in keys:
         element = elements[key]
-
         if isinstance(element, Entrypoint):
             if element.connection not in keys:
-                print(
-                    'ERROR: {} missing connection element {}.'.format(
-                        element.name, element.connection))
+                print('ERROR: {} missing connection element {}.'.format(
+                    element.name, element.connection))
                 exit(0)
-
-        if type(element) in (Entrypoint, Junction, Signal):
+        if isinstance(element, (Entrypoint, Junction, Signal)):
             if element.district not in keys:
-                print(
-                    'ERROR: {} missing district element {}.'.format(
-                        element.name, element.district))
+                print('ERROR: {} missing district element {}.'.format(
+                    element.name, element.district))
                 exit(0)
-
-        if type(element) in (Junction, Signal):
+        if isinstance(element, (Junction, Signal)):
             if element.facing not in keys:
-                print(
-                    'ERROR: {} missing facing element {}.'.format(
-                        element.name, element.facing))
+                print('ERROR: {} missing facing element {}.'.format(
+                    element.name, element.facing))
                 exit(0)
             if element.trailing not in keys:
-                print(
-                    'ERROR: {} missing trailing element {}.'.format(
-                        element.name, element.trailing))
+                print('ERROR: {} missing trailing element {}.'.format(
+                    element.name, element.trailing))
                 exit(0)
         if isinstance(element, Junction):
             if element.sidding not in keys:
-                print(
-                    'ERROR: {} missing sidding element {}.'.format(
-                        element.name, element.sidding))
+                print('ERROR: {} missing sidding element {}.'.format(
+                    element.name, element.sidding))
                 exit(0)
 
     # create connections
