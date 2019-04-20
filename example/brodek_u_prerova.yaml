@@ -152,6 +152,36 @@ signal:
   type: "odjezdové"
   facing: "kolej 4"
   trailing: "6"
+- name: "Se 1"
+  distance: 191.284
+  district: "žst 1"
+  type: "seřaďovací"
+  facing: "Se 3"
+  trailing: "1 L"
+- name: "Se 2"
+  distance: 191.284
+  district: "žst 1"
+  type: "seřaďovací"
+  facing: "Se 4"
+  trailing: "2 L"
+- name: "Se 3"
+  distance: 191.520
+  district: "žst 1"
+  type: "seřaďovací"
+  facing: "Se 1"
+  trailing: "1"
+- name: "Se 4"
+  distance: 191.533
+  district: "žst 1"
+  type: "seřaďovací"
+  facing: "Se 2"
+  trailing: "2"
+- name: "Se 6"
+  distance: 191.688
+  district: "žst 1"
+  type: "seřaďovací"
+  facing: "3"
+  trailing: "6"
 - name: "Se 11"
   distance: 192.871
   district: "žst 2"
