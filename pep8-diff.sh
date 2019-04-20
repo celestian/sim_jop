@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LINE_LENGTH=80
+LINE_LENGTH=100
 
 # Obtain the path to the work directory
 RELATIVE_SOURCE_PATH=`dirname ${BASH_SOURCE[@]}`
