@@ -267,15 +267,23 @@ track:
   start: 191.857
   end: 192.726
   type: "staniční"
+  start_connection: "S 4"
+  end_connection: "L 4"
 - name: "kolej 2"
   start: 191.808
   end: 192.793
   type: "staniční"
+  start_connection: "S 2"
+  end_connection: "L 2"
 - name: "kolej 1"
   start: 191.808
   end: 192.795
   type: "staniční"
+  start_connection: "S 1"
+  end_connection: "L 1"
 - name: "kolej 3"
   start: 191.845
   end: 192.735
   type: "staniční"
+  start_connection: "S 3"
+  end_connection: "L 3"
