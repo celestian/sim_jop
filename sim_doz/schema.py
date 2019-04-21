@@ -134,4 +134,4 @@ def create_schema(source_file):
 
     schema = Schema(area, meta, elements)
     print(yaml.dump(schema))
-    print('distance (min, max) = {}'.format(schema.get_size()))
+    print(schema.get_coordinates())
