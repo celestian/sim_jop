@@ -22,16 +22,78 @@ class Schema(yaml.YAMLObject):
         self.signals = [elements[key] for key in keys if isinstance(elements[key], Signal)]
         self.tracks = [elements[key] for key in keys if isinstance(elements[key], Track)]
 
-    def get_size(self):
-        min_distance = self.junctions[0].distance
-        max_distance = self.junctions[0].distance
+    def _get_distances(self):
 
-        for e in self.junctions:
-            min_distance = e.distance if e.distance < min_distance else min_distance
-            max_distance = e.distance if e.distance > max_distance else max_distance
+        distances = []
+        for element in self.junctions:
+            if element.distance not in distances:
+                distances.append(element.distance)
+        for element in self.signals:
+            if element.distance not in distances:
+                distances.append(element.distance)
+        for element in self.tracks:
+            if element.start not in distances:
+                distances.append(element.start)
+            if element.end not in distances:
+                distances.append(element.end)
 
-        for e in self.signals:
-            min_distance = e.distance if e.distance < min_distance else min_distance
-            max_distance = e.distance if e.distance > max_distance else max_distance
+        return sorted(distances)
 
-        return (min_distance, max_distance)
+    def _go_through(self, previous_element, element, level):
+
+        coordinates = {}
+        distances = self._get_distances()
+
+        if isinstance(element, Signal):
+            coordinates[element.name] = {'row': level,
+                                         'colomn': distances.index(element.distance)
+                                         }
+            next_element = element.facing if previous_element is not element.facing else element.trailing
+            coordinates.update(self._go_through(element, next_element, level))
+
+        if isinstance(element, Track):
+            mark = 'start' if previous_element == element.start_connection else 'end'
+            name = '{}_{}'.format(element.name, mark)
+            coordinates[name] = {'row': level, 'colomn': distances.index(
+                element.start if previous_element == element.start_connection else element.end)}
+
+        return coordinates
+
+    def get_coordinates(self):
+
+        coordinates = {}
+        distances = self._get_distances()
+
+        for element in self.junctions:
+
+            coordinates[element.name] = {'row': element.level,
+                                         'colomn': distances.index(element.distance),
+                                         }
+
+            if element.orientation == 1 and element.type == 'l':
+                coordinates.update(self._go_through(element, element.facing, element.level))
+                coordinates.update(self._go_through(element, element.trailing, element.level))
+                coordinates.update(self._go_through(element, element.sidding, element.level + 1))
+                continue
+
+            if element.orientation == 1 and element.type == 'p':
+                coordinates.update(self._go_through(element, element.facing, element.level))
+                coordinates.update(self._go_through(element, element.trailing, element.level))
+                coordinates.update(self._go_through(element, element.sidding, element.level - 1))
+                continue
+
+            if element.orientation == 5 and element.type == 'l':
+                coordinates.update(self._go_through(element, element.facing, element.level))
+                coordinates.update(self._go_through(element, element.trailing, element.level))
+                coordinates.update(self._go_through(element, element.sidding, element.level - 1))
+                continue
+
+            if element.orientation == 5 and element.type == 'p':
+                coordinates.update(self._go_through(element, element.facing, element.level))
+                coordinates.update(self._go_through(element, element.trailing, element.level))
+                coordinates.update(self._go_through(element, element.sidding, element.level + 1))
+                continue
+
+            print('Something missing')
+
+        return coordinates
