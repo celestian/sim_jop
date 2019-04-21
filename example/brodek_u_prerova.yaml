@@ -32,6 +32,7 @@ junction:
   district: "žst 1"
   type: "p"
   orientation: 1
+  level: 0
   facing: "Se 3"
   trailing: "4"
   sidding: "2"
@@ -40,6 +41,7 @@ junction:
   district: "žst 1"
   type: "p"
   orientation: 5
+  level: -1
   facing: "3"
   trailing: "Se 4"
   sidding: "1"
@@ -48,6 +50,7 @@ junction:
   district: "žst 1"
   type: "l"
   orientation: 1
+  level: -1
   facing: "2"
   trailing: "Se 6"
   sidding: "4"
@@ -56,6 +59,7 @@ junction:
   district: "žst 1"
   type: "l"
   orientation: 5
+  level: 0
   facing: "5"
   trailing: "1"
   sidding: "3"
@@ -64,6 +68,7 @@ junction:
   district: "žst 1"
   type: "l"
   orientation: 1
+  level: 0
   facing: "4"
   trailing: "S 1"
   sidding: "S 3"
@@ -72,6 +77,7 @@ junction:
   district: "žst 1"
   type: "p"
   orientation: 1
+  level: -1
   facing: "Se 6"
   trailing: "S 2"
   sidding: "S 4"
@@ -80,6 +86,7 @@ junction:
   district: "žst 2"
   type: "p"
   orientation: 5
+  level: 0
   facing: "Se 11"
   trailing: "L 1"
   sidding: "L 3"
@@ -88,6 +95,7 @@ junction:
   district: "žst 2"
   type: "l"
   orientation: 5
+  level: -1
   facing: "Se 12"
   trailing: "L 2"
   sidding: "L 4"
@@ -96,6 +104,7 @@ junction:
   district: "žst 2"
   type: "p"
   orientation: 1
+  level: 0
   facing: "14"
   trailing: "19"
   sidding: "17"
@@ -104,6 +113,7 @@ junction:
   district: "žst 2"
   type: "p"
   orientation: 5
+  level: -1
   facing: "18"
   trailing: "15"
   sidding: "16"
@@ -112,6 +122,7 @@ junction:
   district: "žst 2"
   type: "l"
   orientation: 1
+  level: -1
   facing: "17"
   trailing: "Se 13"
   sidding: "19"
@@ -120,6 +131,7 @@ junction:
   district: "žst 2"
   type: "l"
   orientation: 5
+  level: 0
   facing: "Se 15"
   trailing: "16"
   sidding: "18"
