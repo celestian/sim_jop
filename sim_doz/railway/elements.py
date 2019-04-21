@@ -115,6 +115,12 @@ track_structure = [
     }, {
         'label': 'type',
         'type': str,
+    }, {
+        'label': 'start_connection',
+        'type': str,
+    }, {
+        'label': 'end_connection',
+        'type': str,
     },
 ]
 
@@ -251,6 +257,8 @@ class Track(yaml.YAMLObject):
         self.start = data['start']
         self.end = data['end']
         self.type = data['type']
+        self.start_connection = data['start_connection']
+        self.end_connection = data['end_connection']
 
     @staticmethod
     def get_template(is_array):

@@ -106,6 +106,15 @@ def create_schema(source_file):
                 print('ERROR: {} missing sidding element {}.'.format(
                     element.name, element.sidding))
                 exit(0)
+        if isinstance(element, Track):
+            if element.start_connection not in keys:
+                print('ERROR: {} missing start_connection element {}.'.format(
+                    element.name, element.start_connection))
+                exit(0)
+            if element.end_connection not in keys:
+                print('ERROR: {} missing end_connection element {}.'.format(
+                    element.name, element.end_connection))
+                exit(0)
 
     # create connections
     for key in keys:
@@ -119,6 +128,9 @@ def create_schema(source_file):
             element.trailing = elements[element.trailing]
         if isinstance(element, Junction):
             element.sidding = elements[element.sidding]
+        if isinstance(element, Track):
+            element.start_connection = elements[element.start_connection]
+            element.end_connection = elements[element.end_connection]
 
     schema = Schema(area, meta, elements)
     print(yaml.dump(schema))
