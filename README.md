@@ -1,13 +1,21 @@
 # sim_doz
 
+The Game of Railway Traffic Control
+
+
+## About
+
+The goal of sim_doz project is create open source game of railway traffic control.
+If you want to be in touch with the community, please connect to [discord](https://discord.gg/drcmjBf).
+
+
 ## Usage
 
 ### Setup development environment
 
-It is advantage to use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/).
+TBD
+[virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/).
 
-    cdproject sim_doz
-    ./install.sh
 
 ## Resources
 - [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
