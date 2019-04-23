@@ -63,10 +63,7 @@ junction_structure = [
         'label': 'district',
         'type': str,
     }, {
-        'label': 'type',
-        'type': str,
-    }, {
-        'label': 'orientation',
+        'label': 'kind',
         'type': int,
     }, {
         'label': 'level',
@@ -221,8 +218,7 @@ class Junction(yaml.YAMLObject):
         self.name = data['name']
         self.distance = data['distance']
         self.district = data['district']
-        self.type = data['type']
-        self.orientation = data['orientation']
+        self.kind = data['kind']
         self.level = data['level']
         self.facing = data['facing']
         self.trailing = data['trailing']
