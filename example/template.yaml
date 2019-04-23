@@ -11,12 +11,14 @@ district:
 entrypoint:
 - name: ""
   district: ""
+  connection: ""
+  direction_type: ""
 junction:
 - name: ""
   distance: 0
   district: ""
-  type: ""
-  orientation: 0
+  kind: 0
+  level: 0
   facing: ""
   trailing: ""
   sidding: ""
@@ -32,3 +34,5 @@ track:
   start: 0
   end: 0
   type: ""
+  start_connection: ""
+  end_connection: ""

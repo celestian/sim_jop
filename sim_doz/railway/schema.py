@@ -70,28 +70,28 @@ class Schema(yaml.YAMLObject):
                                          'colomn': distances.index(element.distance),
                                          }
 
-            if element.orientation == 1 and element.type == 'l':
+            if element.kind == 1:
                 coordinates.update(self._go_through(element, element.facing, element.level))
                 coordinates.update(self._go_through(element, element.trailing, element.level))
                 coordinates.update(self._go_through(element, element.sidding, element.level + 1))
                 continue
 
-            if element.orientation == 1 and element.type == 'p':
-                coordinates.update(self._go_through(element, element.facing, element.level))
-                coordinates.update(self._go_through(element, element.trailing, element.level))
-                coordinates.update(self._go_through(element, element.sidding, element.level - 1))
-                continue
-
-            if element.orientation == 5 and element.type == 'l':
-                coordinates.update(self._go_through(element, element.facing, element.level))
-                coordinates.update(self._go_through(element, element.trailing, element.level))
-                coordinates.update(self._go_through(element, element.sidding, element.level - 1))
-                continue
-
-            if element.orientation == 5 and element.type == 'p':
+            if element.kind == 4:
                 coordinates.update(self._go_through(element, element.facing, element.level))
                 coordinates.update(self._go_through(element, element.trailing, element.level))
                 coordinates.update(self._go_through(element, element.sidding, element.level + 1))
+                continue
+
+            if element.kind == 5:
+                coordinates.update(self._go_through(element, element.facing, element.level))
+                coordinates.update(self._go_through(element, element.trailing, element.level))
+                coordinates.update(self._go_through(element, element.sidding, element.level - 1))
+                continue
+
+            if element.kind == 8:
+                coordinates.update(self._go_through(element, element.facing, element.level))
+                coordinates.update(self._go_through(element, element.trailing, element.level))
+                coordinates.update(self._go_through(element, element.sidding, element.level - 1))
                 continue
 
             print('Something missing')

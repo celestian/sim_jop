@@ -30,8 +30,7 @@ junction:
 - name: "1"
   distance: 191.523
   district: "žst 1"
-  type: "p"
-  orientation: 1
+  kind: 5
   level: 0
   facing: "Se 3"
   trailing: "4"
@@ -39,8 +38,7 @@ junction:
 - name: "2"
   distance: 191.602
   district: "žst 1"
-  type: "p"
-  orientation: 5
+  kind: 1
   level: -1
   facing: "3"
   trailing: "Se 4"
@@ -48,8 +46,7 @@ junction:
 - name: "3"
   distance: 191.608
   district: "žst 1"
-  type: "l"
-  orientation: 1
+  kind: 4
   level: -1
   facing: "2"
   trailing: "Se 6"
@@ -57,8 +54,7 @@ junction:
 - name: "4"
   distance: 191.688
   district: "žst 1"
-  type: "l"
-  orientation: 5
+  kind: 8
   level: 0
   facing: "5"
   trailing: "1"
@@ -66,8 +62,7 @@ junction:
 - name: "5"
   distance: 191.712
   district: "žst 1"
-  type: "l"
-  orientation: 1
+  kind: 4
   level: 0
   facing: "4"
   trailing: "S 1"
@@ -75,8 +70,7 @@ junction:
 - name: "6"
   distance: 191.712
   district: "žst 1"
-  type: "p"
-  orientation: 1
+  kind: 5
   level: -1
   facing: "Se 6"
   trailing: "S 2"
@@ -84,8 +78,7 @@ junction:
 - name: "14"
   distance: 192.867
   district: "žst 2"
-  type: "p"
-  orientation: 5
+  kind: 1
   level: 0
   facing: "Se 11"
   trailing: "L 1"
@@ -93,8 +86,7 @@ junction:
 - name: "15"
   distance: 192.867
   district: "žst 2"
-  type: "l"
-  orientation: 5
+  kind: 8
   level: -1
   facing: "Se 12"
   trailing: "L 2"
@@ -102,8 +94,7 @@ junction:
 - name: "16"
   distance: 192.873
   district: "žst 2"
-  type: "p"
-  orientation: 1
+  kind: 5
   level: 0
   facing: "14"
   trailing: "19"
@@ -111,8 +102,7 @@ junction:
 - name: "17"
   distance: 192.952
   district: "žst 2"
-  type: "p"
-  orientation: 5
+  kind: 1
   level: -1
   facing: "18"
   trailing: "15"
@@ -120,8 +110,7 @@ junction:
 - name: "18"
   distance: 192.958
   district: "žst 2"
-  type: "l"
-  orientation: 1
+  kind: 4
   level: -1
   facing: "17"
   trailing: "Se 13"
@@ -129,8 +118,7 @@ junction:
 - name: "19"
   distance: 193.057
   district: "žst 2"
-  type: "l"
-  orientation: 5
+  kind: 8
   level: 0
   facing: "Se 15"
   trailing: "16"
