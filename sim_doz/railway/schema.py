@@ -22,6 +22,8 @@ class Schema(yaml.YAMLObject):
         self.signals = [elements[key] for key in keys if isinstance(elements[key], Signal)]
         self.tracks = [elements[key] for key in keys if isinstance(elements[key], Track)]
 
+        self.distances = self._get_distances()
+
     def _get_distances(self):
 
         distances = []
@@ -42,11 +44,10 @@ class Schema(yaml.YAMLObject):
     def _go_through(self, previous_element, element, level):
 
         coordinates = {}
-        distances = self._get_distances()
 
         if isinstance(element, Signal):
             coordinates[element.name] = {'row': level,
-                                         'colomn': distances.index(element.distance)
+                                         'colomn': self.distances.index(element.distance)
                                          }
             next_element = element.facing if previous_element is not element.facing else element.trailing
             coordinates.update(self._go_through(element, next_element, level))
@@ -54,7 +55,7 @@ class Schema(yaml.YAMLObject):
         if isinstance(element, Track):
             mark = 'start' if previous_element == element.start_connection else 'end'
             name = '{}_{}'.format(element.name, mark)
-            coordinates[name] = {'row': level, 'colomn': distances.index(
+            coordinates[name] = {'row': level, 'colomn': self.distances.index(
                 element.start if previous_element == element.start_connection else element.end)}
 
         return coordinates
@@ -62,12 +63,11 @@ class Schema(yaml.YAMLObject):
     def get_coordinates(self):
 
         coordinates = {}
-        distances = self._get_distances()
 
         for element in self.junctions:
 
             coordinates[element.name] = {'row': element.level,
-                                         'colomn': distances.index(element.distance),
+                                         'colomn': self.distances.index(element.distance),
                                          }
 
             if element.kind == 1:
