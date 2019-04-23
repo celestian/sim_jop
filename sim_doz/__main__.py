@@ -3,8 +3,8 @@
 """sim_doz
 Usage:
   sim_doz schema prepare <area.yaml>
-  sim_doz schema create <area.yaml>
-  sim_doz editor
+  sim_doz schema check <area.yaml>
+  sim_doz schema show <area.yaml>
   sim_doz (-h | --help)
   sim_doz --version
 Options:
@@ -30,11 +30,11 @@ def main():
     if args['schema'] and args['prepare']:
         prepare_schema(args['<area.yaml>'])
 
-    if args['schema'] and args['create']:
+    if args['schema'] and args['check']:
         create_schema(args['<area.yaml>'])
 
-    if args['editor']:
-        EditorWindow(800, 600, 'sim_doz')
+    if args['schema'] and args['show']:
+        EditorWindow(800, 600, create_schema(args['<area.yaml>']))
         pyglet.app.run()
 
 

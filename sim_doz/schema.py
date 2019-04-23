@@ -133,5 +133,4 @@ def create_schema(source_file):
             element.end_connection = elements[element.end_connection]
 
     schema = Schema(area, meta, elements)
-    print(yaml.dump(schema))
-    print(schema.get_coordinates())
+    return(schema.get_coordinates())
