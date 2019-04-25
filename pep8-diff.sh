@@ -9,8 +9,8 @@ SOURCE_PATH=`readlink -f ${RELATIVE_SOURCE_PATH}`
 
 TMP_FILE=`mktemp`
 
-autopep8 --max-line-length ${LINE_LENGTH} --diff -aaa -r ${SOURCE_PATH}/sim_doz/ >> ${TMP_FILE}
-autopep8 --max-line-length ${LINE_LENGTH} --diff -aaa -r ${SOURCE_PATH}/sim_doz/railway/ >> ${TMP_FILE}
+autopep8 --max-line-length ${LINE_LENGTH} --diff -aaa -r ${SOURCE_PATH}/sim_jop/ >> ${TMP_FILE}
+autopep8 --max-line-length ${LINE_LENGTH} --diff -aaa -r ${SOURCE_PATH}/sim_jop/railway/ >> ${TMP_FILE}
 
 autopep8 --max-line-length ${LINE_LENGTH} --diff -aaa ${SOURCE_PATH}/setup.py >> ${TMP_FILE}
 

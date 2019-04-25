@@ -10,7 +10,7 @@ SOURCE_PATH=`readlink -f ${RELATIVE_SOURCE_PATH}`
 # sed --in-place 's/[[:space:]]\+$//' `find ${SOURCE_PATH} -type f -name '*.md'`
 # sed --in-place 's/[[:space:]]\+$//' `find ${SOURCE_PATH} -type f -name '*.feature'`
 
-autopep8 --max-line-length ${LINE_LENGTH} -i -aaa -r ${SOURCE_PATH}/sim_doz/
-autopep8 --max-line-length ${LINE_LENGTH} -i -aaa -r ${SOURCE_PATH}/sim_doz/railway
+autopep8 --max-line-length ${LINE_LENGTH} -i -aaa -r ${SOURCE_PATH}/sim_jop/
+autopep8 --max-line-length ${LINE_LENGTH} -i -aaa -r ${SOURCE_PATH}/sim_jop/railway
 
 autopep8 --max-line-length ${LINE_LENGTH} -i -aaa ${SOURCE_PATH}/setup.py

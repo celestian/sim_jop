@@ -61,7 +61,7 @@ class GTrack:
 class EditorWindow(pyglet.window.Window):
 
     def __init__(self, width, heigth, area):
-        super().__init__(width, heigth, caption='sim_doz')
+        super().__init__(width, heigth, caption='sim_jop')
         self.zoom = Zoom(1)
         self.grid = Grid(self.zoom)
         self.area = area

@@ -3,12 +3,12 @@
 from setuptools import setup
 
 setup(
-    name='sim_doz',
+    name='sim_jop',
     version='0.0.1',
-    packages=['sim_doz'],
+    packages=['sim_jop'],
     entry_points={
         'console_scripts': [
-            'sim_doz = sim_doz.__main__:main'
+            'sim_jop = sim_jop.__main__:main'
         ]
     }
 )

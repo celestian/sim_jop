@@ -3,8 +3,8 @@
 import yaml
 import json
 
-from sim_doz.railway.elements import Area, Meta, District, Entrypoint, Junction, Signal, Track
-from sim_doz.railway.schema import Schema
+from sim_jop.railway.elements import Area, Meta, District, Entrypoint, Junction, Signal, Track
+from sim_jop.railway.schema import Schema
 
 
 def prepare_schema(output_file):

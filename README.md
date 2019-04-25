@@ -1,11 +1,11 @@
-# sim_doz
+# sim_jop
 
 The Game of Railway Traffic Control
 
 
 ## About
 
-The goal of sim_doz project is create open source game of railway traffic control.
+The goal of sim_jop project is create open source game of railway traffic control.
 If you want to be in touch with the community, please connect to [discord](https://discord.gg/drcmjBf).
 
 

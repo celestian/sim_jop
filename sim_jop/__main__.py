@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-"""sim_doz
+"""sim_jop
 Usage:
-  sim_doz schema prepare <area.yaml>
-  sim_doz schema check <area.yaml>
-  sim_doz schema show <area.yaml>
-  sim_doz (-h | --help)
-  sim_doz --version
+  sim_jop schema prepare <area.yaml>
+  sim_jop schema check <area.yaml>
+  sim_jop schema show <area.yaml>
+  sim_jop (-h | --help)
+  sim_jop --version
 Options:
  -h --help     Show this screen.
  --version     Show version.
@@ -16,8 +16,8 @@ from docopt import docopt
 import yaml
 import pyglet
 
-from sim_doz.schema import prepare_schema, create_schema
-from sim_doz.module import EditorWindow
+from sim_jop.schema import prepare_schema, create_schema
+from sim_jop.module import EditorWindow
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
     Entry point
     """
 
-    args = docopt(__doc__, version='sim_doz 0.0.1')
+    args = docopt(__doc__, version='sim_jop 0.0.1')
 
     if args['schema'] and args['prepare']:
         prepare_schema(args['<area.yaml>'])
