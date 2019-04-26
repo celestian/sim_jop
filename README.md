@@ -13,8 +13,23 @@ If you want to be in touch with the community, please connect to [discord](https
 
 ### Setup development environment
 
-TBD
+#### Virtualenvwrapper
+
 [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/).
+
+    pip install --user virtualenvwrapper
+
+    # add to ~/.bashrc
+    export WORKON_HOME=$HOME/.envs
+    export PROJECT_HOME=$HOME/Projects
+    source $HOME/.local/bin/virtualenvwrapper.sh
+
+
+#### git clone
+
+    cd $PROJECT_HOME
+    mkproject sim_jop
+    git clone git@github.com:celestian/sim_jop.git
 
 
 ## Resources
