@@ -17,7 +17,7 @@ import yaml
 import pyglet
 
 from sim_jop.schema import prepare_schema, create_schema
-from sim_jop.module import EditorWindow
+from sim_jop.module import start_application
 
 
 def main():
@@ -34,8 +34,7 @@ def main():
         create_schema(args['<area.yaml>'])
 
     if args['schema'] and args['show']:
-        EditorWindow(800, 600, create_schema(args['<area.yaml>']))
-        pyglet.app.run()
+        start_application(args)
 
 
 if __name__ == '__main__':
