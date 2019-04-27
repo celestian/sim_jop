@@ -9,7 +9,7 @@ The goal of sim_jop project is create open source game of railway traffic contro
 If you want to be in touch with the community, please connect to [discord](https://discord.gg/drcmjBf).
 
 
-## Usage
+## Development & Contributions
 
 ### Setup development environment on Linux
 
@@ -38,6 +38,12 @@ If you want to be in touch with the community, please connect to [discord](https
 ### Activate development environment
 
     source env/bin/activate
+
+### Build package & release
+
+    pip3 install --upgrade setuptools wheel twine
+    python3 setup.py sdist bdist_wheel
+    python3 -m twine upload dist/*
 
 
 ## Resources
