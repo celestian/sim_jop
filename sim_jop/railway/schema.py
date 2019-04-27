@@ -70,30 +70,28 @@ class Schema(yaml.YAMLObject):
                                          'colomn': self.distances.index(element.distance),
                                          }
 
-            if element.kind == 1:
+            if element.kind == 1 or element.kind == 4:
                 coordinates.update(self._go_through(element, element.facing, element.level))
                 coordinates.update(self._go_through(element, element.trailing, element.level))
                 coordinates.update(self._go_through(element, element.sidding, element.level + 1))
                 continue
 
-            if element.kind == 4:
-                coordinates.update(self._go_through(element, element.facing, element.level))
-                coordinates.update(self._go_through(element, element.trailing, element.level))
-                coordinates.update(self._go_through(element, element.sidding, element.level + 1))
+            if element.kind == 2 or element.kind == 3:
+                coordinates.update(self._go_through(element, element.facing, element.level - 1))
+                coordinates.update(self._go_through(element, element.trailing, element.level + 1))
+                coordinates.update(self._go_through(element, element.sidding, element.level))
                 continue
 
-            if element.kind == 5:
-                coordinates.update(self._go_through(element, element.facing, element.level))
-                coordinates.update(self._go_through(element, element.trailing, element.level))
-                coordinates.update(self._go_through(element, element.sidding, element.level - 1))
-                continue
-
-            if element.kind == 8:
+            if element.kind == 5 or element.kind == 8:
                 coordinates.update(self._go_through(element, element.facing, element.level))
                 coordinates.update(self._go_through(element, element.trailing, element.level))
                 coordinates.update(self._go_through(element, element.sidding, element.level - 1))
                 continue
 
-            print('Something missing')
+            if element.kind == 6 or element.kind == 7:
+                coordinates.update(self._go_through(element, element.facing, element.level + 1))
+                coordinates.update(self._go_through(element, element.trailing, element.level - 1))
+                coordinates.update(self._go_through(element, element.sidding, element.level))
+                continue
 
         return coordinates
