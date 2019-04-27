@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import yaml
-import json
 
 from sim_jop.railway.elements import Area, Meta, District, Entrypoint, Junction, Signal, Track
 from sim_jop.railway.schema import Schema
@@ -133,4 +132,4 @@ def create_schema(source_file):
             element.end_connection = elements[element.end_connection]
 
     schema = Schema(area, meta, elements)
-    return(schema.get_coordinates())
+    return schema.get_coordinates()

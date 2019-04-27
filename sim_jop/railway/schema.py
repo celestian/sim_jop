@@ -2,7 +2,7 @@
 
 import yaml
 
-from sim_jop.railway.elements import Area, Meta, District, Entrypoint, Junction, Signal, Track
+from sim_jop.railway.elements import District, Entrypoint, Junction, Signal, Track
 
 
 class Schema(yaml.YAMLObject):

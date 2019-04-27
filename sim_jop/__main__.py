@@ -13,8 +13,6 @@ Options:
 """
 
 from docopt import docopt
-import yaml
-import pyglet
 
 from sim_jop.schema import prepare_schema, create_schema
 from sim_jop.module import start_application
