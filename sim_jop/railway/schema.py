@@ -2,7 +2,7 @@
 
 import yaml
 
-from sim_jop.railway.elements import District, Entrypoint, Junction, Signal, Track
+from sim_jop.railway.elements import Area, Meta, District, Entrypoint, Junction, Signal, Track
 
 
 class Schema(yaml.YAMLObject):
@@ -47,7 +47,7 @@ class Schema(yaml.YAMLObject):
 
         if isinstance(element, Signal):
             coordinates[element.name] = {'row': level,
-                                         'colomn': self.distances.index(element.distance)
+                                         'column': self.distances.index(element.distance)
                                          }
             next_element = element.facing if previous_element is not element.facing else element.trailing
             coordinates.update(self._go_through(element, next_element, level))
@@ -55,7 +55,7 @@ class Schema(yaml.YAMLObject):
         if isinstance(element, Track):
             mark = 'start' if previous_element == element.start_connection else 'end'
             name = '{}_{}'.format(element.name, mark)
-            coordinates[name] = {'row': level, 'colomn': self.distances.index(
+            coordinates[name] = {'row': level, 'column': self.distances.index(
                 element.start if previous_element == element.start_connection else element.end)}
 
         return coordinates
@@ -67,7 +67,7 @@ class Schema(yaml.YAMLObject):
         for element in self.junctions:
 
             coordinates[element.name] = {'row': element.level,
-                                         'colomn': self.distances.index(element.distance),
+                                         'column': self.distances.index(element.distance),
                                          }
 
             if element.kind == 1 or element.kind == 4:
@@ -95,3 +95,95 @@ class Schema(yaml.YAMLObject):
                 continue
 
         return coordinates
+
+
+def create_schema(source_file):
+
+    area = None
+    meta = None
+    elements = {}
+
+    with open(source_file, 'r') as source:
+        data = yaml.safe_load(source)
+
+    if 'area' in data:
+        area = Area(data['area'])
+
+    if 'meta' in data:
+        meta = Meta(data['meta'])
+
+    if 'district' in data:
+        for item in data['district']:
+            elements[item['name']] = District(item)
+
+    if 'entrypoint' in data:
+        for item in data['entrypoint']:
+            elements[item['name']] = Entrypoint(item)
+
+    if 'junction' in data:
+        for item in data['junction']:
+            elements[item['name']] = Junction(item)
+
+    if 'signal' in data:
+        for item in data['signal']:
+            elements[item['name']] = Signal(item)
+
+    if 'track' in data:
+        for item in data['track']:
+            elements[item['name']] = Track(item)
+
+    # integrity check
+    keys = list(elements.keys())
+    for key in keys:
+        element = elements[key]
+        if isinstance(element, Entrypoint):
+            if element.connection not in keys:
+                print('ERROR: {} missing connection element {}.'.format(
+                    element.name, element.connection))
+                exit(0)
+        if isinstance(element, (Entrypoint, Junction, Signal)):
+            if element.district not in keys:
+                print('ERROR: {} missing district element {}.'.format(
+                    element.name, element.district))
+                exit(0)
+        if isinstance(element, (Junction, Signal)):
+            if element.facing not in keys:
+                print('ERROR: {} missing facing element {}.'.format(
+                    element.name, element.facing))
+                exit(0)
+            if element.trailing not in keys:
+                print('ERROR: {} missing trailing element {}.'.format(
+                    element.name, element.trailing))
+                exit(0)
+        if isinstance(element, Junction):
+            if element.sidding not in keys:
+                print('ERROR: {} missing sidding element {}.'.format(
+                    element.name, element.sidding))
+                exit(0)
+        if isinstance(element, Track):
+            if element.start_connection not in keys:
+                print('ERROR: {} missing start_connection element {}.'.format(
+                    element.name, element.start_connection))
+                exit(0)
+            if element.end_connection not in keys:
+                print('ERROR: {} missing end_connection element {}.'.format(
+                    element.name, element.end_connection))
+                exit(0)
+
+    # create connections
+    for key in keys:
+        element = elements[key]
+        if isinstance(element, Entrypoint):
+            element.connection = elements[element.connection]
+        if isinstance(element, (Entrypoint, Junction, Signal)):
+            element.district = elements[element.district]
+        if isinstance(element, (Junction, Signal)):
+            element.facing = elements[element.facing]
+            element.trailing = elements[element.trailing]
+        if isinstance(element, Junction):
+            element.sidding = elements[element.sidding]
+        if isinstance(element, Track):
+            element.start_connection = elements[element.start_connection]
+            element.end_connection = elements[element.end_connection]
+
+    return Schema(area, meta, elements)

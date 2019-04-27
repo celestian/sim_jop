@@ -48,16 +48,16 @@ class Grid:
 
 class EditorWindow(pyglet.window.Window):
 
-    def __init__(self, width, heigth, area):
+    def __init__(self, width, heigth, schema):
         super().__init__(width, heigth, caption='sim_jop')
         self.zoom = Zoom(1)
         self.grid = Grid(self.zoom)
-        self.area = area
+        self.area = schema.get_coordinates()
         # self.line = GTrack(10, 5, self.zoom)
 
         self.lines = []
         for e in self.area:
-            line = GTrack(self.area[e]['colomn'], self.area[e]['row'], self.zoom)
+            line = GTrack(self.area[e]['column'], self.area[e]['row'], self.zoom)
             self.lines.append(line)
 
     def on_draw(self):
