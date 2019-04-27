@@ -2,7 +2,7 @@
 
 import pyglet
 
-from sim_jop.schema import create_schema
+from sim_jop.railway.schema import create_schema
 from sim_jop.gui.window import EditorWindow
 
 
