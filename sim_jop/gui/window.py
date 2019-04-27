@@ -19,11 +19,11 @@ class Zoom:
 
     def get_width(self, plan_width):
         plan_width = plan_width + 10
-        return (plan_width * self.box_width)
+        return plan_width * self.box_width
 
     def get_heigth(self, plan_heigth):
         plan_heigth = plan_heigth + 10
-        return (plan_heigth * self.box_heigth)
+        return plan_heigth * self.box_heigth
 
 
 class Grid:
