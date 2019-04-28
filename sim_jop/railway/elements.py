@@ -204,6 +204,10 @@ class Entrypoint(yaml.YAMLObject):
         self.connection = data['connection']
         self.direction_type = data['direction_type']
 
+        if self.direction_type not in ('in', 'out', 'both'):
+            print('ERROR: entrypoint "{}": incorrect value of direction_type'.format(self.name))
+            exit(0)
+
     @staticmethod
     def get_template(is_array):
         return prepare_template(entrypoint_structure, is_array)
@@ -224,6 +228,10 @@ class Junction(yaml.YAMLObject):
         self.trailing = data['trailing']
         self.sidding = data['sidding']
 
+        if self.kind < 1 and self.kind > 8:
+            print('ERROR: junction "{}": incorrect value of kind'.format(self.name))
+            exit(0)
+
     @staticmethod
     def get_template(is_array):
         return prepare_template(junction_structure, is_array)
@@ -242,6 +250,8 @@ class Signal(yaml.YAMLObject):
         self.facing = data['facing']
         self.trailing = data['trailing']
 
+        # TODO: check type
+
     @staticmethod
     def get_template(is_array):
         return prepare_template(signal_structure, is_array)
@@ -259,6 +269,8 @@ class Track(yaml.YAMLObject):
         self.type = data['type']
         self.start_connection = data['start_connection']
         self.end_connection = data['end_connection']
+
+        # TODO: Check type
 
     @staticmethod
     def get_template(is_array):
