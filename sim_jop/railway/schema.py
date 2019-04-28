@@ -103,14 +103,25 @@ def create_schema(source_file):
     meta = None
     elements = {}
 
+    print('Loading file "{}"'.format(source_file))
+
     with open(source_file, 'r') as source:
         data = yaml.safe_load(source)
 
     if 'area' in data:
         area = Area(data['area'])
+    else:
+        print('ERROR: area is missing')
+        exit(0)
 
     if 'meta' in data:
         meta = Meta(data['meta'])
+    else:
+        print('ERROR: meta is missing')
+        exit(0)
+
+    print('Schema {} by {}'.format(area.name, meta.author))
+    print('Version {}'.format(meta.version))
 
     if 'district' in data:
         for item in data['district']:
@@ -132,43 +143,46 @@ def create_schema(source_file):
         for item in data['track']:
             elements[item['name']] = Track(item)
 
+    print('Schema contains {} elements'.format(len(elements)))
+
     # integrity check
     keys = list(elements.keys())
     for key in keys:
         element = elements[key]
         if isinstance(element, Entrypoint):
             if element.connection not in keys:
-                print('ERROR: {} missing connection element {}.'.format(
+                print('ERROR: {} is missing connection element {}'.format(
                     element.name, element.connection))
                 exit(0)
         if isinstance(element, (Entrypoint, Junction, Signal)):
             if element.district not in keys:
-                print('ERROR: {} missing district element {}.'.format(
+                print('ERROR: {} is missing district element {}'.format(
                     element.name, element.district))
                 exit(0)
         if isinstance(element, (Junction, Signal)):
             if element.facing not in keys:
-                print('ERROR: {} missing facing element {}.'.format(
+                print('ERROR: {} is missing facing element {}'.format(
                     element.name, element.facing))
                 exit(0)
             if element.trailing not in keys:
-                print('ERROR: {} missing trailing element {}.'.format(
+                print('ERROR: {} is missing trailing element {}'.format(
                     element.name, element.trailing))
                 exit(0)
         if isinstance(element, Junction):
             if element.sidding not in keys:
-                print('ERROR: {} missing sidding element {}.'.format(
+                print('ERROR: {} is missing sidding element {}'.format(
                     element.name, element.sidding))
                 exit(0)
         if isinstance(element, Track):
             if element.start_connection not in keys:
-                print('ERROR: {} missing start_connection element {}.'.format(
+                print('ERROR: {} is missing start_connection element {}'.format(
                     element.name, element.start_connection))
                 exit(0)
             if element.end_connection not in keys:
-                print('ERROR: {} missing end_connection element {}.'.format(
+                print('ERROR: {} is missing end_connection element {}'.format(
                     element.name, element.end_connection))
                 exit(0)
+    print('Succesful integrity check')
 
     # create connections
     for key in keys:
@@ -185,5 +199,6 @@ def create_schema(source_file):
         if isinstance(element, Track):
             element.start_connection = elements[element.start_connection]
             element.end_connection = elements[element.end_connection]
+    print('Connections created')
 
     return Schema(area, meta, elements)
