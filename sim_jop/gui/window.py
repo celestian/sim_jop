@@ -2,41 +2,25 @@
 
 import pyglet
 
+from sim_jop.gui.view import View
 from sim_jop.gui.schema_elements import GTrack
 
 # Coordinate system:
-# * window: width, heigth
-# * plan: plan_width, plan_heigth
-# * box: box_width, box_heigth
-
-
-class Zoom:
-
-    def __init__(self, zoom_level):
-        coefficient = (zoom_level + 1) * 2
-        self.box_width = 2 * coefficient
-        self.box_heigth = 3 * coefficient
-
-    def get_width(self, plan_width):
-        plan_width = plan_width + 10
-        return plan_width * self.box_width
-
-    def get_heigth(self, plan_heigth):
-        plan_heigth = plan_heigth + 10
-        return plan_heigth * self.box_heigth
+# * window: width, height
+# * plan: plan_width, plan_height
+# * box: box_width, box_height
 
 
 class Grid:
 
-    def __init__(self, zoom):
+    def __init__(self, view):
 
-        width = 800
-        heigth = 600
+        self._view = view
 
         points = []
 
-        for w in range(0, width, zoom.box_width):
-            for h in range(0, heigth, zoom.box_heigth):
+        for w in range(0, self._view.width, self._view.box_width):
+            for h in range(0, self._view.height, self._view.box_height):
                 points.append(w)
                 points.append(h)
 
@@ -45,25 +29,26 @@ class Grid:
         self.vertices = pyglet.graphics.vertex_list(
             number, ('v2i', points), ('c3B', color * number))
 
+    def draw(self):
+        self.vertices.draw(pyglet.gl.GL_POINTS)
+
 
 class EditorWindow(pyglet.window.Window):
 
-    def __init__(self, width, heigth, schema):
-        super().__init__(width, heigth, caption='sim_jop')
-        self.zoom = Zoom(1)
-        self.grid = Grid(self.zoom)
-        self.area = schema.get_coordinates()
-        # self.line = GTrack(10, 5, self.zoom)
+    def __init__(self, width, height, zoom_level, layout):
 
-        self.lines = []
-        for e in self.area:
-            line = GTrack(self.area[e]['column'], self.area[e]['row'], self.zoom)
-            self.lines.append(line)
+        self._width = width
+        self._height = height
+        self._zoom_level = zoom_level
+        self._view = View(self._width, self._height, self._zoom_level)
+
+        super().__init__(self._width, self._height, caption='sim_jop')
+        self._view = View(self._width, self._height, self._zoom_level)
+
+        self._grid = Grid(self._view)
+        self._layout = layout
 
     def on_draw(self):
         self.clear()
-        self.grid.vertices.draw(pyglet.gl.GL_POINTS)
-        # self.line.vertices.draw(pyglet.gl.GL_LINES)
-
-        for e in self.lines:
-            e.vertices.draw(pyglet.gl.GL_LINES)
+        self._grid.draw()
+        self._layout.draw()
