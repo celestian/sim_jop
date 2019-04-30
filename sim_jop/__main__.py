@@ -13,9 +13,9 @@ Options:
 """
 
 from docopt import docopt
+import logging
 
-from sim_jop.schema import prepare_schema
-from sim_jop.railway.schema import create_schema
+from sim_jop.railway.schema import Schema, prepare_schema
 from sim_jop.module import start_application
 
 
@@ -26,11 +26,13 @@ def main():
 
     args = docopt(__doc__, version='sim_jop 0.0.1')
 
+    logging.basicConfig(level=logging.INFO)
+
     if args['schema'] and args['prepare']:
         prepare_schema(args['<area.yaml>'])
 
     if args['schema'] and args['check']:
-        create_schema(args['<area.yaml>'])
+        Schema(args['<area.yaml>'])
 
     if args['schema'] and args['show']:
         start_application(args)
