@@ -91,7 +91,6 @@ class Chart:
 
         return coordinates
 
-
     def draw(self):
         pass
         # line = GTrack(self.area[e]['column'], self.area[e]['row'], self._zoom)

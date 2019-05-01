@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 class View:
 
     def __init__(self, width, height, zoom_level):
