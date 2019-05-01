@@ -51,4 +51,4 @@ class EditorWindow(pyglet.window.Window):
     def on_draw(self):
         self.clear()
         self._grid.draw()
-        self._layout.draw()
+        self._layout.draw(self._view)

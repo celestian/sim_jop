@@ -92,7 +92,7 @@ class Chart:
 
         return coordinates
 
-    def draw(self):
+    def draw(self, view):
         pass
         # line = GTrack(self.area[e]['column'], self.area[e]['row'], self._zoom)
         # e.vertices.draw(pyglet.gl.GL_LINES)

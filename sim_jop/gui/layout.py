@@ -9,7 +9,7 @@ class Layout:
     def add(self, chart):
         self._charts.append(chart)
 
-    def draw(self):
+    def draw(self, view):
 
         for chart in self._charts:
-            chart.draw()
+            chart.draw(view)
