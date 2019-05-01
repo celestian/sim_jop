@@ -63,7 +63,7 @@ junction_structure = [
         'label': 'district',
         'type': str,
     }, {
-        'label': 'kind',
+        'label': 'type',
         'type': int,
     }, {
         'label': 'level',
@@ -222,14 +222,14 @@ class Junction(yaml.YAMLObject):
         self.name = data['name']
         self.distance = data['distance']
         self.district = data['district']
-        self.kind = data['kind']
+        self.type = data['type']
         self.level = data['level']
         self.facing = data['facing']
         self.trailing = data['trailing']
         self.sidding = data['sidding']
 
-        if self.kind < 1 and self.kind > 8:
-            print('ERROR: junction "{}": incorrect value of kind'.format(self.name))
+        if self.type < 1 and self.type > 8:
+            print('ERROR: junction "{}": incorrect value of type'.format(self.name))
             exit(0)
 
     @staticmethod

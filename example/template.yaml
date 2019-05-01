@@ -17,7 +17,7 @@ junction:
 - name: ""
   distance: 0
   district: ""
-  kind: 0
+  type: 0
   level: 0
   facing: ""
   trailing: ""
