@@ -7,21 +7,22 @@ class ChartElement:
 
         self.element = element
         self.name = element.name
-        self.type = None
+        self.type = self._get_type()
         self.coord_x = coord_x
         self.coord_y = coord_y
 
-        self._get_type()
-
     def _get_type(self):
 
-        if isinstance(element, Junction):
-            self.type = 'junction'
-        if isinstance(element, Signal):
-            self.type = 'signal'
-        if isinstance(element, Track):
-            self.type = 'track'
+        element_type = None
 
+        if isinstance(element, Junction):
+            element_type = 'junction'
+        if isinstance(element, Signal):
+            element_type = 'signal'
+        if isinstance(element, Track):
+            element_type = 'track'
+
+        return element_type
 
 class Chart:
 
