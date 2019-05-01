@@ -37,12 +37,12 @@ class EditorWindow(pyglet.window.Window):
 
     def __init__(self, width, height, zoom_level, layout):
 
+        super().__init__(width, height, caption='sim_jop')
+
         self._width = width
         self._height = height
         self._zoom_level = zoom_level
-        self._view = View(self._width, self._height, self._zoom_level)
 
-        super().__init__(self._width, self._height, caption='sim_jop')
         self._view = View(self._width, self._height, self._zoom_level)
 
         self._grid = Grid(self._view)
