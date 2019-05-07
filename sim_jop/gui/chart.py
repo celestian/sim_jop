@@ -24,6 +24,7 @@ class ChartElement:
 
         return element_type
 
+
 class Chart:
 
     def __init__(self, schema):
