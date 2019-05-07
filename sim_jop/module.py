@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import logging
 import pyglet
 
 from sim_jop.railway.schema import Schema
@@ -8,13 +9,13 @@ from sim_jop.gui.layout import Layout
 from sim_jop.gui.window import EditorWindow
 
 
-def start_application(args):
+LOG = logging.getLogger(__name__)
 
-    schema = Schema(args['<area.yaml>'])
-    chart = Chart(schema)
 
-    layout = Layout()
-    layout.add(chart)
+def start_editor(args):
 
-    EditorWindow(800, 600, 1, layout)
+    window = EditorWindow()
+    window.set_visible()
+    window.on_draw()
+
     pyglet.app.run()
