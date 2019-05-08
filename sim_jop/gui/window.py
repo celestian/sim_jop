@@ -14,6 +14,27 @@ from sim_jop.gui.schema_elements import GTrack
 LOG = logging.getLogger(__name__)
 
 
+class Menu:
+
+    def __init__(self, position):
+        self.position = position
+        self.batch = pyglet.graphics.Batch()
+
+        points = []
+        points.extend([self.position['width_start'], self.position['height_start']])
+        points.extend([self.position['width_end'], self.position['height_start']])
+        points.extend([self.position['width_end'], self.position['height_end']])
+        points.extend([self.position['width_start'], self.position['height_end']])
+        points.extend([self.position['width_start'], self.position['height_start'] - 1])
+
+        color = [0, 180, 190]
+        self.palette = pyglet.graphics.vertex_list_indexed(
+            5, [0, 1, 1, 2, 2, 3, 3, 4], ('v2i', points), ('c3B', color * 5))
+
+    def draw(self):
+        self.palette.draw(pyglet.gl.GL_LINES)
+
+
 class Grid:
 
     def __init__(self, width, height, box_width, box_height):
@@ -63,6 +84,21 @@ class EditorWindow(pyglet.window.Window):
         self.max_x = int(self.width / self.box_width)
         self.max_y = int(self.height / self.box_height)
 
+        menu_position = {
+            'width_start': 1,
+            'width_end': self.width,
+            'height_start': self.height - (15 * self.box_height) + 1,
+            'height_end': self.height,
+        }
+        grid_position = {
+            'width_start': 1,
+            'width_end': self.width,
+            'height_start': 0,
+            'height_end': self.height - (15 * self.box_height) - 1,
+        }
+
+        self.menu = Menu(menu_position)
+
         self.grid = Grid(
             self.width,
             self.height -
@@ -87,10 +123,11 @@ class EditorWindow(pyglet.window.Window):
         points.extend([(self.pos_x + 1) * self.box_width, self.pos_y * self.box_height])
         points.extend([(self.pos_x + 1) * self.box_width, (self.pos_y + 1) * self.box_height])
         points.extend([self.pos_x * self.box_width, (self.pos_y + 1) * self.box_height])
+        points.extend([self.pos_x * self.box_width, self.pos_y * self.box_height - 1])
 
-        number = int(len(points) / 2.0)
         color = [255, 0, 0]
-        self.cursor = pyglet.graphics.vertex_list(number, ('v2i', points), ('c3B', color * number))
+        self.cursor = pyglet.graphics.vertex_list_indexed(
+            5, [0, 1, 1, 2, 2, 3, 3, 4], ('v2i', points), ('c3B', color * 5))
 
     def on_mouse_motion(self, x, y, dx, dy):
 
@@ -106,8 +143,7 @@ class EditorWindow(pyglet.window.Window):
 
     def on_draw(self):
         self.clear()
-
+        self.menu.draw()
         if self.is_grid_on:
             self.grid.draw()
-
-        self.cursor.draw(pyglet.gl.GL_QUADS)
+        self.cursor.draw(pyglet.gl.GL_LINES)
