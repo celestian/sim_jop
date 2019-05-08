@@ -18,6 +18,8 @@ class Grid:
 
     def __init__(self, width, height, box_width, box_height):
 
+        self.batch = pyglet.graphics.Batch()
+
         points = []
         self.labels = []
 
@@ -36,11 +38,10 @@ class Grid:
 
         number = int(len(points) / 2.0)
         color = [30, 30, 40]
-        self.vertices = pyglet.graphics.vertex_list(
-            number, ('v2i', points), ('c3B', color * number))
+        self.batch.add(number, pyglet.gl.GL_LINES, None, ('v2i', points), ('c3B', color * number))
 
     def draw(self):
-        self.vertices.draw(pyglet.gl.GL_LINES)
+        self.batch.draw()
         for label in self.labels:
             label.draw()
 
@@ -62,8 +63,16 @@ class EditorWindow(pyglet.window.Window):
         self.max_x = int(self.width / self.box_width)
         self.max_y = int(self.height / self.box_height)
 
-        self.grid = Grid(self.width, self.height, self.box_width, self.box_height)
+        self.grid = Grid(
+            self.width,
+            self.height -
+            15 *
+            self.box_height,
+            self.box_width,
+            self.box_height)
         self._set_cursor()
+
+        self.is_grid_on = False
 
     def _get_box(self, pos_x, pos_y):
         box_x = int(pos_x / self.box_width) if pos_x / self.box_width < self.max_x else self.max_x
@@ -92,8 +101,13 @@ class EditorWindow(pyglet.window.Window):
     def on_key_press(self, symbol, modifiers):
         if symbol == pyglet.window.key.Q:
             pyglet.app.exit()
+        if symbol == pyglet.window.key.G:
+            self.is_grid_on = False if self.is_grid_on else True
 
     def on_draw(self):
         self.clear()
-        self.grid.draw()
+
+        if self.is_grid_on:
+            self.grid.draw()
+
         self.cursor.draw(pyglet.gl.GL_QUADS)
