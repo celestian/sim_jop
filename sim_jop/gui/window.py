@@ -3,6 +3,7 @@
 import logging
 import pyglet
 
+from sim_jop.gui.shape import Rectangle
 from sim_jop.gui.view import View
 from sim_jop.gui.schema_elements import GTrack
 
@@ -12,6 +13,8 @@ from sim_jop.gui.schema_elements import GTrack
 # * box: box_width, box_height
 
 LOG = logging.getLogger(__name__)
+
+CURSOR_COLOR = [255, 0, 0]
 
 
 class Menu:
@@ -76,13 +79,17 @@ class EditorWindow(pyglet.window.Window):
 
         self.zoom_level = 1
         self.pos_x, self.pos_y = (0, 0)
-        self.cursor = None
 
         coefficient = (self.zoom_level + 1) * 2
         self.box_width = 2 * coefficient
         self.box_height = 3 * coefficient
         self.max_x = int(self.width / self.box_width)
         self.max_y = int(self.height / self.box_height)
+
+        self.batch = pyglet.graphics.Batch()
+        self.background = pyglet.graphics.OrderedGroup(0)
+        self.middleground = pyglet.graphics.OrderedGroup(1)
+        self.foreground = pyglet.graphics.OrderedGroup(2)
 
         menu_position = {
             'width_start': 1,
@@ -97,6 +104,12 @@ class EditorWindow(pyglet.window.Window):
             'height_end': self.height - (15 * self.box_height) - 1,
         }
 
+        self.cursor = Rectangle(
+            self.batch,
+            self.foreground,
+            self._get_cursor_geometry(),
+            CURSOR_COLOR)
+
         self.menu = Menu(menu_position)
 
         self.grid = Grid(
@@ -106,7 +119,6 @@ class EditorWindow(pyglet.window.Window):
             self.box_height,
             self.box_width,
             self.box_height)
-        self._set_cursor()
 
         self.is_grid_on = False
 
@@ -116,23 +128,19 @@ class EditorWindow(pyglet.window.Window):
             self.box_height < self.max_y - 1 else self.max_y - 1
         return (box_x, box_y)
 
-    def _set_cursor(self):
-
-        points = []
-        points.extend([self.pos_x * self.box_width, self.pos_y * self.box_height])
-        points.extend([(self.pos_x + 1) * self.box_width, self.pos_y * self.box_height])
-        points.extend([(self.pos_x + 1) * self.box_width, (self.pos_y + 1) * self.box_height])
-        points.extend([self.pos_x * self.box_width, (self.pos_y + 1) * self.box_height])
-        points.extend([self.pos_x * self.box_width, self.pos_y * self.box_height - 1])
-
-        color = [255, 0, 0]
-        self.cursor = pyglet.graphics.vertex_list_indexed(
-            5, [0, 1, 1, 2, 2, 3, 3, 4], ('v2i', points), ('c3B', color * 5))
+    def _get_cursor_geometry(self):
+        cursor_geometry = {
+            'width_start': self.pos_x * self.box_width,
+            'width_end': (self.pos_x + 1) * self.box_width,
+            'height_start': self.pos_y * self.box_height,
+            'height_end': (self.pos_y + 1) * self.box_height,
+        }
+        return cursor_geometry
 
     def on_mouse_motion(self, x, y, dx, dy):
 
         self.pos_x, self.pos_y = self._get_box(x, y)
-        self._set_cursor()
+        self.cursor.move(self._get_cursor_geometry())
         self.on_draw()
 
     def on_key_press(self, symbol, modifiers):
@@ -146,4 +154,4 @@ class EditorWindow(pyglet.window.Window):
         self.menu.draw()
         if self.is_grid_on:
             self.grid.draw()
-        self.cursor.draw(pyglet.gl.GL_LINES)
+        self.batch.draw()
