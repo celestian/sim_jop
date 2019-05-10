@@ -14,28 +14,14 @@ from sim_jop.gui.schema_elements import GTrack
 
 LOG = logging.getLogger(__name__)
 
+BASE_GUI_COLOR = [0, 180, 190]
 CURSOR_COLOR = [255, 0, 0]
 
 
 class Menu:
 
-    def __init__(self, position):
-        self.position = position
-        self.batch = pyglet.graphics.Batch()
-
-        points = []
-        points.extend([self.position['width_start'], self.position['height_start']])
-        points.extend([self.position['width_end'], self.position['height_start']])
-        points.extend([self.position['width_end'], self.position['height_end']])
-        points.extend([self.position['width_start'], self.position['height_end']])
-        points.extend([self.position['width_start'], self.position['height_start'] - 1])
-
-        color = [0, 180, 190]
-        self.palette = pyglet.graphics.vertex_list_indexed(
-            5, [0, 1, 1, 2, 2, 3, 3, 4], ('v2i', points), ('c3B', color * 5))
-
-    def draw(self):
-        self.palette.draw(pyglet.gl.GL_LINES)
+    def __init__(self, batch, group, geometry):
+        self.frame = Rectangle(batch, group, geometry, BASE_GUI_COLOR)
 
 
 class Grid:
@@ -91,12 +77,15 @@ class EditorWindow(pyglet.window.Window):
         self.middleground = pyglet.graphics.OrderedGroup(1)
         self.foreground = pyglet.graphics.OrderedGroup(2)
 
-        menu_position = {
+        menu_geometry = {
             'width_start': 1,
             'width_end': self.width,
             'height_start': self.height - (15 * self.box_height) + 1,
             'height_end': self.height,
         }
+
+        self.menu = Menu(self.batch, self.background, menu_geometry)
+
         grid_position = {
             'width_start': 1,
             'width_end': self.width,
@@ -109,8 +98,6 @@ class EditorWindow(pyglet.window.Window):
             self.foreground,
             self._get_cursor_geometry(),
             CURSOR_COLOR)
-
-        self.menu = Menu(menu_position)
 
         self.grid = Grid(
             self.width,
@@ -151,7 +138,6 @@ class EditorWindow(pyglet.window.Window):
 
     def on_draw(self):
         self.clear()
-        self.menu.draw()
         if self.is_grid_on:
             self.grid.draw()
         self.batch.draw()
