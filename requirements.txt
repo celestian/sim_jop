@@ -1,5 +1,0 @@
-autopep8
-pylint
-docopt
-pyyaml
-pyglet
