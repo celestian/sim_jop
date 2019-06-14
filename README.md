@@ -8,15 +8,11 @@ The Game of Railway Traffic Control
 The goal of sim_jop project is create open source game of railway traffic control.
 If you want to be in touch with the community, please connect to [discord](https://discord.gg/drcmjBf).
 
-
 ## Development & Contributions
 
 ### Setup development environment on Linux
 
-    # packages needed on Fedora 29
-    sudo dnf install -y python3-pip
-
-    # clone the repository
+    # clone the repository (or your fork)
     git clone git@github.com:celestian/sim_jop.git
 
     # setup commit template
@@ -29,23 +25,6 @@ If you want to be in touch with the community, please connect to [discord](https
     # (optionally)
     git config user.signingkey your_gpg_key
 
-    # create virtual environment
-    python3 -m venv env
-
-    # install requirements
-    ./install.sh
-
-### Activate development environment
-
-    source env/bin/activate
-
-### Build package & release
-
-    pip3 install --upgrade setuptools wheel twine
-    python3 setup.py sdist bdist_wheel
-    python3 -m twine upload dist/*
-
-
 ## Resources
 
 ### JOP, DOZ
@@ -56,6 +35,18 @@ If you want to be in touch with the community, please connect to [discord](https
 - [Brodek u Přerova](http://www.gvd.cz/cz/data/planky/3xx/309/331421.xls)
 
 ### Software engineering
+
+#### General
 - [regular expression](https://regexr.com/)
 - [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation)
-- [pyglet](https://pyglet.readthedocs.io/en/pyglet-1.3-maintenance/)
+
+#### Python
+- [Flask](http://flask.pocoo.org/)
+- [eventlet](http://eventlet.net/)
+- [Flask-SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
+
+#### React
+- [react](https://reactjs.org/docs/introducing-jsx.html)
+- [react and canvas](https://lavrton.com/using-react-with-html5-canvas-871d07d8d753/)
+- [react events](https://reactjs.org/docs/handling-events.html)
+- [mouse event](https://stackoverflow.com/questions/31519758/reacts-mouseevent-doesnt-have-offsetx-offsety)
