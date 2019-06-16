@@ -79,6 +79,10 @@ class Canvas extends React.Component {
         window.removeEventListener("resize", this.checkSize);
     }
 
+    componentWillUpdate() {
+        if (this.state.data !== this.props.data) this.setState({data: this.props.data});
+    }
+
     checkSize = () => {
         const width = this.container.offsetWidth;
 
