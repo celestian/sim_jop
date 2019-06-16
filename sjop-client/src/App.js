@@ -100,7 +100,7 @@ class Canvas extends React.Component {
     }
 
     render() {
-        var data = JSON.parse(this.state.data);
+        var data = JSON.parse(this.props.data);
         return (
             <div
                 style={{
@@ -134,10 +134,7 @@ class App extends React.Component{
     }
 
     handleButton(data, event) {
-        console.log("Handle Button:", data);
-        console.log("Handle Button:", event.target.value);
         this.setState({reliefData: data});
-        console.log("Handle Button:", this.state.reliefData);
         event.preventDefault();
     }
 
