@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Container  from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Circle, Layer, Rect, Stage, Konva} from 'react-konva';
+import {Layer, Rect, Stage, Konva} from 'react-konva';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,7 +11,7 @@ class ReliefInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'Prosím, vložte definici reliéfu...',
+            value: this.props.data,
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -48,10 +48,26 @@ class ReliefInput extends React.Component {
     }
 }
 
+class Track extends React.Component {
+    // zoom 2, w 12, h 18
+    render() {
+        return (
+            <Rect
+                x={this.props.x * 12}
+                y={this.props.y * 18 + 8}
+                width={12}
+                height={2}
+                fill="gray"
+            />
+        );
+    }
+}
+
 class Canvas extends React.Component {
     state = {
-    stageWidth: 1,
-    stageHeight: 1
+        stageWidth: 1,
+        stageHeight: 1,
+        data: this.props.data,
     };
 
     componentDidMount() {
@@ -66,19 +82,21 @@ class Canvas extends React.Component {
     checkSize = () => {
         const width = this.container.offsetWidth;
 
-        var root = document.getElementById("root")
-        var header_row = document.getElementById("header_row")
-        var footer_row = document.getElementById("footer_row")
-        const height = root.offsetHeight - header_row.offsetHeight - footer_row.offsetHeight;
+        var root = document.getElementById("root");
+        var header_row = document.getElementById("header_row");
+        var footer_row = document.getElementById("footer_row");
+        const height = root.clientHeight - header_row.clientHeight - footer_row.clientHeight - 5;
 
         this.setState({
             stageWidth: width,
             stageHeight: height
         });
+        console.log(`Resolution: ${width}x${height} pts`);
+        console.log(`            ${(width - (width % 12)) / 12}x${(height - (height % 18)) / 18} tiles`);
     }
 
     render() {
-        const radius = this.state.stageWidth / 10;
+        var data = JSON.parse(this.state.data);
         return (
             <div
                 style={{
@@ -92,7 +110,9 @@ class Canvas extends React.Component {
             >
                 <Stage width={this.state.stageWidth} height={this.state.stageHeight}>
                     <Layer>
-                        <Circle x={radius} y={radius} radius={radius} fill="red" />
+                        {data['track'].map(i => (
+                            <Track key={i.key} x={i.x} y={i.y}/>
+                        ))}
                     </Layer>
                 </Stage>
             </div>
@@ -101,12 +121,19 @@ class Canvas extends React.Component {
 }
 
 class App extends React.Component{
-    state = {
-        count: 0
+    constructor(props) {
+        super(props);
+        this.state = {
+            reliefData: '{"track": [{"key": 0, "x":3, "y": 3},{"key": 1, "x":4, "y": 3},{"key": 2, "x":5, "y": 3}]}',
+        };
+        this.handleButton = this.handleButton.bind(this);
     }
 
     handleButton(data, event) {
         console.log("Handle Button:", data);
+        console.log("Handle Button:", event.target.value);
+        this.setState({reliefData: data});
+        console.log("Handle Button:", this.state.reliefData);
         event.preventDefault();
     }
 
@@ -116,12 +143,12 @@ class App extends React.Component{
                 <Container fluid="true">
                     <Row id="header_row">
                         <Col>
-                            <ReliefInput buttonClicked={this.handleButton}/>
+                            <ReliefInput buttonClicked={this.handleButton} data={this.state.reliefData} />
                         </Col>
                     </Row>
                     <Row>
                         <Col id="canvas_place">
-                            <Canvas />
+                            <Canvas data={this.state.reliefData} />
                         </Col>
                     </Row>
                     <Row id="footer_row">
