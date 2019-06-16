@@ -46,7 +46,10 @@ If you want to be in touch with the community, please connect to [discord](https
 - [Flask-SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
 
 #### React
-- [react](https://reactjs.org/docs/introducing-jsx.html)
+- [react](https://reactjs.org/docs/getting-started.html)
+- [bootstrap](https://www.bootstrapcdn.com/)
+- [react-bootstrap](https://react-bootstrap.github.io/getting-started/introduction/)
+- [konva](https://konvajs.org/api/Konva.html)
 - [react and canvas](https://lavrton.com/using-react-with-html5-canvas-871d07d8d753/)
 - [react events](https://reactjs.org/docs/handling-events.html)
 - [mouse event](https://stackoverflow.com/questions/31519758/reacts-mouseevent-doesnt-have-offsetx-offsety)
