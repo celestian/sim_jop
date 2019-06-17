@@ -27,15 +27,6 @@ If you want to be in touch with the community, please connect to [discord](https
 
 ## Resources
 
-### JOP, DOZ
-- [ztp-jop](http://spz.logout.cz/zabezpec/ztp-jop.html)
-- [mapa CDP]( https://provoz.szdc.cz/PORTAL/Show.aspx?path=/Data/Mapy/DOZ.pdf)
-- [plánky](http://www.gvd.cz/cz/data/planky/planky.html)
-- [GVD](http://gvd.cz/czx/)
-- [Brodek u Přerova](http://www.gvd.cz/cz/data/planky/3xx/309/331421.xls)
-
-### Software engineering
-
 #### General
 - [regular expression](https://regexr.com/)
 - [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation)
