@@ -11,3 +11,7 @@ body {
 #canvas_parent {
     height: 100%;
 }
+
+canvas {
+  cursor: none;
+}
