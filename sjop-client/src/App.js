@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 import Container  from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Layer, Rect, Stage, Konva} from 'react-konva';
-import logo from './logo.svg';
+import {Layer, Rect, Stage} from 'react-konva';
 import './App.css';
 
 class ReliefInput extends React.Component {
@@ -67,7 +65,6 @@ class Canvas extends React.Component {
     state = {
         stageWidth: 1,
         stageHeight: 1,
-        data: this.props.data,
         mouseCoords: {x: 0, y: 0}
     };
 
@@ -78,10 +75,6 @@ class Canvas extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.checkSize);
-    }
-
-    componentWillUpdate() {
-        if (this.state.data !== this.props.data) this.setState({data: this.props.data});
     }
 
     checkSize = () => {
