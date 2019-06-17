@@ -2,7 +2,7 @@ import React from 'react';
 import Container  from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Layer, Rect, Stage} from 'react-konva';
+import {Layer, Rect, Stage, RegularPolygon, Line} from 'react-konva';
 import './App.css';
 
 class ReliefInput extends React.Component {
@@ -78,6 +78,36 @@ class Cursor extends React.Component {
     }
 }
 
+class Signal extends React.Component {
+    // zoom 2, w 12, h 18
+    render() {
+        if (this.props.type === 1) {
+            return (
+                <RegularPolygon
+                    x={this.props.dir === "r" ? this.props.x * 12 - 7 : this.props.dir === "l" ? this.props.x * 12 - 5 : this.props.x * 12}
+                    y={this.props.y * 18 + 8}
+                    width={12}
+                    height={2}
+                    fill={this.props.signal === "red" ? "red" : this.props.signal === "green" ? "lime" : this.props.signal === "blue" ? "blue" : "gray"}
+                    sides={3}
+                    radius={6}
+                    rotation={this.props.dir === "r" ? 90 : this.props.dir === "l" ? -90 : 0}
+                />
+            );
+        } else if (this.props.type === 2) {
+            return (
+                <Line
+                    points={this.props.dir === "r" ? [this.props.x * 12 - 9, this.props.y * 18 + 4, this.props.x * 12 - 2, this.props.y * 18 + 8, this.props.x * 12 - 9, this.props.y * 18 + 12] : this.props.dir === "l" ? [this.props.x * 12 - 3, this.props.y * 18 + 4, this.props.x * 12 - 10, this.props.y * 18 + 8, this.props.x * 12 - 3, this.props.y * 18 + 12] : ""}
+                    stroke={this.props.signal === "red" ? "red" : this.props.signal === "green" ? "lime" : this.props.signal === "blue" ? "blue" : "gray"}
+                    strokeWidth={2}
+                    lineCap="square"
+                    lineJoin="square"
+                />
+            );
+        }
+    }
+}
+
 class Canvas extends React.Component {
     state = {
         stageWidth: 1,
@@ -138,6 +168,9 @@ class Canvas extends React.Component {
                         {data['track'].map(i => (
                             <Track key={i.key} x={i.x} y={i.y}/>
                         ))}
+                        {data['signal'].map(i => (
+                            <Signal key={i.key} x={i.x} y={i.y} type={i.type} dir={i.dir} signal={i.signal}/>
+                        ))}
                         <Cursor x={this.state.mouseCoords.x} y={this.state.mouseCoords.y}/>
                     </Layer>
                 </Stage>
@@ -150,7 +183,10 @@ class App extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            reliefData: '{"track": [{"key": 0, "x":3, "y": 3},{"key": 1, "x":4, "y": 3},{"key": 2, "x":5, "y": 3}]}',
+            reliefData: `{
+                "track": [{"key": 0, "x":3, "y": 3},{"key": 1, "x":4, "y": 3},{"key": 2, "x":5, "y": 3}],
+                "signal": [{"key": 3, "x":4, "y": 3, "type": 1, "dir": "l", "signal": "red"},{"key": 4, "x":5, "y": 3, "type": 1, "dir": "r", "signal": "green"},{"key": 5, "x":6, "y": 3, "type": 2, "dir": "l", "signal": "blue"}]
+            }`,
         };
         this.handleButton = this.handleButton.bind(this);
     }
