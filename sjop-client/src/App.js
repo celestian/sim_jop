@@ -68,6 +68,7 @@ class Canvas extends React.Component {
         stageWidth: 1,
         stageHeight: 1,
         data: this.props.data,
+        mouseCoords: {x: 0, y: 0}
     };
 
     componentDidMount() {
@@ -99,6 +100,16 @@ class Canvas extends React.Component {
         console.log(`            ${(width - (width % 12)) / 12}x${(height - (height % 18)) / 18} tiles`);
     }
 
+    getMouseCoords = (e) => {
+        console.log(`Cursor relative offset to canvas: x:${e.evt.offsetX} y:${e.evt.offsetY}`);
+        this.setState({
+            mouseCoords: {
+                x: e.evt.offsetX,
+                y: e.evt.offsetY
+            }
+        });
+    }
+
     render() {
         var data = JSON.parse(this.props.data);
         return (
@@ -112,7 +123,7 @@ class Canvas extends React.Component {
                     this.container = node;
                 }}
             >
-                <Stage width={this.state.stageWidth} height={this.state.stageHeight}>
+                <Stage width={this.state.stageWidth} height={this.state.stageHeight} onMouseMove={this.getMouseCoords.bind(this.getMouseCoords)}>
                     <Layer>
                         {data['track'].map(i => (
                             <Track key={i.key} x={i.x} y={i.y}/>
