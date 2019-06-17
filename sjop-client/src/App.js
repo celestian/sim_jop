@@ -61,6 +61,23 @@ class Track extends React.Component {
     }
 }
 
+class Cursor extends React.Component {
+    // zoom 2, w 12, h 12
+    render() {
+        return (
+            <Rect
+                x={this.props.x}
+                y={this.props.y}
+                width={12-1*2}
+                height={12-1*2}
+                fill="rgba(0,0,0,0)"
+                stroke="rgba(255,0,0,1)"
+                strokeWidth={1}
+            />
+        );
+    }
+}
+
 class Canvas extends React.Component {
     state = {
         stageWidth: 1,
@@ -121,6 +138,7 @@ class Canvas extends React.Component {
                         {data['track'].map(i => (
                             <Track key={i.key} x={i.x} y={i.y}/>
                         ))}
+                        <Cursor x={this.state.mouseCoords.x} y={this.state.mouseCoords.y}/>
                     </Layer>
                 </Stage>
             </div>
