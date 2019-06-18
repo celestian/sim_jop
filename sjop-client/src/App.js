@@ -2,7 +2,7 @@ import React from 'react';
 import Container  from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Layer, Rect, Stage, RegularPolygon, Line} from 'react-konva';
+import {Layer, Rect, Stage, Line} from 'react-konva';
 import './App.css';
 
 class ReliefInput extends React.Component {
@@ -83,21 +83,22 @@ class Signal extends React.Component {
     render() {
         if (this.props.type === 1) {
             return (
-                <RegularPolygon
-                    x={this.props.dir === "r" ? this.props.x * 12 - 7 : this.props.dir === "l" ? this.props.x * 12 - 5 : this.props.x * 12}
-                    y={this.props.y * 18 + 8}
-                    width={12}
-                    height={2}
+                <Line
+                    y={1}
+                    points={this.props.dir === "r" ? [this.props.x * 12 - 9, this.props.y * 18 + 4, this.props.x * 12 - 3, this.props.y * 18 + 8, this.props.x * 12 - 9, this.props.y * 18 + 12, this.props.x * 12 - 10, this.props.y * 18 + 12, this.props.x * 12 - 10, this.props.y * 18 + 4] : this.props.dir === "l" ? [this.props.x * 12 - 3, this.props.y * 18 + 4, this.props.x * 12 - 9, this.props.y * 18 + 8, this.props.x * 12 - 3, this.props.y * 18 + 12, this.props.x * 12 - 2, this.props.y * 18 + 12, this.props.x * 12 - 2, this.props.y * 18 + 4] : ""}
                     fill={this.props.signal === "red" ? "red" : this.props.signal === "green" ? "lime" : this.props.signal === "blue" ? "blue" : "gray"}
-                    sides={3}
-                    radius={6}
-                    rotation={this.props.dir === "r" ? 90 : this.props.dir === "l" ? -90 : 0}
+                    stroke={this.props.signal === "red" ? "red" : this.props.signal === "green" ? "lime" : this.props.signal === "blue" ? "blue" : "gray"}
+                    strokeWidth={2}
+                    lineCap="square"
+                    lineJoin="square"
+                    closed="true"
                 />
             );
         } else if (this.props.type === 2) {
             return (
                 <Line
-                    points={this.props.dir === "r" ? [this.props.x * 12 - 9, this.props.y * 18 + 4, this.props.x * 12 - 2, this.props.y * 18 + 8, this.props.x * 12 - 9, this.props.y * 18 + 12] : this.props.dir === "l" ? [this.props.x * 12 - 3, this.props.y * 18 + 4, this.props.x * 12 - 10, this.props.y * 18 + 8, this.props.x * 12 - 3, this.props.y * 18 + 12] : ""}
+                    y={1}
+                    points={this.props.dir === "r" ? [this.props.x * 12 - 9, this.props.y * 18 + 4, this.props.x * 12 - 3, this.props.y * 18 + 8, this.props.x * 12 - 9, this.props.y * 18 + 12] : this.props.dir === "l" ? [this.props.x * 12 - 3, this.props.y * 18 + 4, this.props.x * 12 - 9, this.props.y * 18 + 8, this.props.x * 12 - 3, this.props.y * 18 + 12] : ""}
                     stroke={this.props.signal === "red" ? "red" : this.props.signal === "green" ? "lime" : this.props.signal === "blue" ? "blue" : "gray"}
                     strokeWidth={2}
                     lineCap="square"
