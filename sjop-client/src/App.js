@@ -11,9 +11,10 @@ class App extends React.Component{
         super(props);
         this.state = {
             reliefData: `{
-                "track": [{"key": 0, "x":3, "y": 3},{"key": 1, "x":4, "y": 3},{"key": 2, "x":5, "y": 3}],
-                "signal": [{"key": 3, "x":4, "y": 3, "type": 1, "dir": "l", "signal": "red"},{"key": 4, "x":5, "y": 3, "type": 1, "dir": "r", "signal": "green"},{"key": 5, "x":6, "y": 3, "type": 2, "dir": "l", "signal": "blue"}]
+                "track": [{"key": 0, "x":3, "y": 3, "len": 3}],
+                "signal": [{"key": 1, "x":4, "y": 3, "type": 1, "dir": "l", "signal": "red"},{"key": 2, "x":5, "y": 3, "type": 1, "dir": "r", "signal": "green"},{"key": 3, "x":6, "y": 3, "type": 2, "dir": "l", "signal": "blue"}]
             }`,
+            
         };
         this.handleButton = this.handleButton.bind(this);
     }

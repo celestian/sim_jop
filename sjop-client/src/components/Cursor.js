@@ -11,7 +11,7 @@ class Cursor extends React.Component {
                 width={12}
                 height={18}
                 fill="rgba(0,0,0,0)"
-                stroke="rgba(255,0,0,1)"
+                stroke="rgb(184, 99, 188)"
                 strokeWidth={1}
             />
         );

@@ -1,16 +1,17 @@
 import React from 'react';
-import {Rect} from 'react-konva';
+import {Line} from 'react-konva';
 
 class Track extends React.Component {
     // zoom 2, w 12, h 18
     render() {
         return (
-            <Rect
-                x={this.props.x * 12}
-                y={this.props.y * 18 + 8}
-                width={12}
-                height={2}
-                fill="gray"
+            <Line
+                points={[
+                        this.props.x * 12, this.props.y * 18 + 9,
+                        this.props.x * 12 + this.props.length * 12, this.props.y * 18 + 9
+                    ]}
+                strokeWidth={2}
+                stroke="gray"
             />
         );
     }
