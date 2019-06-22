@@ -15,6 +15,7 @@ import tempfile
 import logging
 import configparser
 import requests
+import json
 
 
 LOG = logging.getLogger(__name__)
@@ -27,12 +28,48 @@ def main():
     args = docopt(__doc__, version='opnl2json 0.0.1')
     logging.basicConfig(level=logging.INFO)
 
+    result = {'track': [], 'signal': []}
+    result_key = 0
+
     response = requests.get(args['<raw_github_file>'])
 
     if 200 == response.status_code:
         parser = configparser.ConfigParser(allow_no_value=True)
         parser.read_string(response.text[1:])
-        LOG.info(parser.sections())
+
+        if 'G' not in parser.sections():
+            print("Wrong format.")
+
+        print(parser.sections())
+
+        if 'ver' in parser['G']:
+            version = parser['G']['ver']
+            if version not in ['1.1']:
+                print("Unsuported format.")
+            print("version: {}".format(version))
+
+        if 'P' in parser.sections():
+            signal_count = int(parser['P']['N'])
+            track_count = int(parser['P']['U'])
+
+        for i in range(track_count):
+            key = 'U{}'.format(i)
+            #         "track": [{"key": 0, "x":3, "y": 3, "len": 3}],
+
+            sections = parser[key]['S']
+            chunks = [sections[i:i + 8] for i in range(0, len(sections), 8)]
+            for chunk in chunks:
+                x = chunk[0:3]
+                y = chunk[3:6]
+                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1})
+                result_key = result_key + 1
+
+        for i in range(signal_count):
+            key = 'N{}'.format(i)
+            result['signal'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y']), 'type': 1, 'dir': 'l', 'signal': 'green'})
+            result_key = result_key + 1
+
+        print(json.dumps(result, sort_keys=True))
 
 if __name__ == '__main__':
     main()
