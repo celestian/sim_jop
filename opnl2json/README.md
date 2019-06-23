@@ -8,3 +8,5 @@ Converter for opnl to json file format.
     source env/bin/activate
 
     pip3 install -r requirements.txt
+
+    python -m opnl2json https://raw.githubusercontent.com/kmzbrnoI/hJOPpanely/master/h0-mendelu/Namest.opnl
