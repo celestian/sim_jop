@@ -61,12 +61,32 @@ def main():
             for chunk in chunks:
                 x = chunk[0:3]
                 y = chunk[3:6]
-                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1})
+                t = int(chunk[6:8])
+                # 12 je asi rovne => type = 1
+                # 14 je asi sikmo -> type = 2
+                type = 1
+                if t == 14:
+                    type = 2
+                    print("type 2", result_key)
+                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type})
                 result_key = result_key + 1
 
         for i in range(signal_count):
             key = 'N{}'.format(i)
-            result['signal'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y']), 'type': 1, 'dir': 'l', 'signal': 'green'})
+            symbol = int(parser[key]['S'])
+            if symbol == 0:
+                dir = 'r'
+                type = 1
+            if symbol == 1:
+                dir = 'l'
+                type = 1
+            if symbol == 4:
+                dir = 'r'
+                type = 2
+            if symbol == 5:
+                dir = 'l'
+                type = 2
+            result['signal'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y']), 'type': type, 'dir': dir, 'signal': 'green'})
             result_key = result_key + 1
 
         print(json.dumps(result, sort_keys=True))
