@@ -54,13 +54,11 @@ def main():
 
         for i in range(track_count):
             key = 'U{}'.format(i)
-            #         "track": [{"key": 0, "x":3, "y": 3, "len": 3}],
-
             sections = parser[key]['S']
             chunks = [sections[i:i + 8] for i in range(0, len(sections), 8)]
             for chunk in chunks:
-                x = chunk[0:3]
-                y = chunk[3:6]
+                x = int(chunk[0:3])
+                y = int(chunk[3:6])
                 t = int(chunk[6:8])
                 # 12 je asi rovne => type = 1
                 # 14 je asi sikmo -> type = 2
