@@ -2,6 +2,7 @@ import React from 'react';
 import {Layer, Stage} from 'react-konva';
 import Signal from './Signal';
 import Track from './Track';
+import Junction from './Junction';
 import Cursor from './Cursor';
 
 class Canvas extends React.Component {
@@ -66,6 +67,9 @@ class Canvas extends React.Component {
                         ))}
                         {data['signal'].map(i => (
                             <Signal key={i.key} x={i.x} y={i.y} type={i.type} dir={i.dir} signal={i.signal}/>
+                        ))}
+                        {data['junction'].map(i => (
+                            <Junction key={i.key} x={i.x} y={i.y} />
                         ))}
                         <Cursor x={this.state.mouseCoords.x} y={this.state.mouseCoords.y}/>
                     </Layer>

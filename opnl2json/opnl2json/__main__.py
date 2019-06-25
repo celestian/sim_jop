@@ -28,7 +28,7 @@ def main():
     args = docopt(__doc__, version='opnl2json 0.0.1')
     logging.basicConfig(level=logging.INFO)
 
-    result = {'track': [], 'signal': []}
+    result = {'track': [], 'signal': [], 'junction': []}
     result_key = 0
 
     response = requests.get(args['<raw_github_file>'])
@@ -51,6 +51,7 @@ def main():
         if 'P' in parser.sections():
             signal_count = int(parser['P']['N'])
             track_count = int(parser['P']['U'])
+            junction_count = int(parser['P']['V'])
 
         for i in range(track_count):
             key = 'U{}'.format(i)
@@ -61,13 +62,16 @@ def main():
                 y = int(chunk[3:6])
                 t = int(chunk[6:8])
                 # 12 je asi rovne => type = 1
-                # 14 je asi sikmo -> type = 2
+                # 14 je asi sikmo => type = 2
+                # 16 je asi opacne sikmo
                 type = 1
                 dir = None
                 if t == 14:
                     type = 2
                     dir = 'lb-rt'
-                    print("type 2", result_key)
+                if t == 16:
+                    type = 2
+                    dir = 'lt-rb'
                 result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type, 'dir': dir})
                 result_key = result_key + 1
 
@@ -87,6 +91,13 @@ def main():
                 dir = 'l'
                 type = 2
             result['signal'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y']), 'type': type, 'dir': dir, 'signal': 'green'})
+            result_key = result_key + 1
+
+        for i in range(junction_count):
+            key = 'N{}'.format(i)
+            symbol = int(parser[key]['S'])
+            print("vyhybka: ", symbol)
+            result['junction'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y'])})
             result_key = result_key + 1
 
         print(json.dumps(result, sort_keys=True))

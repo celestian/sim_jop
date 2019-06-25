@@ -12,7 +12,8 @@ class App extends React.Component{
         this.state = {
             reliefData: `{
                 "track": [{"key": 0, "x": 3, "y": 3, "len": 3, "type": 1},{"key": 4, "x": 6, "y": 3, "len": 3, "type": 2, "dir": "lb-rt"},{"key": 5, "x": 6.5, "y": 2.5, "len": 3, "type": 1},{"key": 6, "x": 6, "y": 3, "len": 3, "type": 2, "dir": "lt-rb"},{"key": 7, "x": 6.5, "y": 3.5, "len": 3, "type": 1},{"key": 8, "x": 9.5, "y": 2.5, "len": 3, "type": 2, "dir": "lt-rb"},{"key": 9, "x": 9.5, "y": 3.5, "len": 3, "type": 2, "dir": "lb-rt"},{"key": 10, "x": 10, "y": 3, "len": 3, "type": 1}],
-                "signal": [{"key": 1, "x": 4, "y": 3, "type": 1, "dir": "l", "signal": "red"},{"key": 2, "x": 5, "y": 3, "type": 1, "dir": "r", "signal": "green"},{"key": 3, "x": 6, "y": 3, "type": 2, "dir": "l", "signal": "blue"}]
+                "signal": [{"key": 1, "x": 4, "y": 3, "type": 1, "dir": "l", "signal": "red"},{"key": 2, "x": 5, "y": 3, "type": 1, "dir": "r", "signal": "green"},{"key": 3, "x": 6, "y": 3, "type": 2, "dir": "l", "signal": "blue"}],
+                "junction": []
             }`,
 
         };
