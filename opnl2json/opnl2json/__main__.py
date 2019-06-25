@@ -61,21 +61,8 @@ def main():
                 x = int(chunk[0:3])
                 y = int(chunk[3:6])
                 t = int(chunk[6:8])
-                # 12 je asi rovne => type = 1
-                # 14 je asi sikmo => type = 2
-                # 16 je asi opacne sikmo
-                type = 1
-                dir = None
-                if t == 14:
-                    type = 2
-                if t == 16:
-                    type = 1
-                if t == 15:
-                    type = 15
-                if t == 18:
-                    type = 18
                 print("kolej: [{},{} | {}]".format(x, y, t))
-                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type})
+                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': t})
                 result_key = result_key + 1
 
         for i in range(signal_count):
