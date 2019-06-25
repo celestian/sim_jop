@@ -69,7 +69,7 @@ class Canvas extends React.Component {
                             <Signal key={i.key} x={i.x} y={i.y} type={i.type} dir={i.dir} signal={i.signal}/>
                         ))}
                         {data['junction'].map(i => (
-                            <Junction key={i.key} x={i.x} y={i.y} />
+                            <Junction key={i.key} x={i.x} y={i.y} type={i.type} />
                         ))}
                         <Cursor x={this.state.mouseCoords.x} y={this.state.mouseCoords.y}/>
                     </Layer>

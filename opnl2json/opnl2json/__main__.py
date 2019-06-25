@@ -90,14 +90,18 @@ def main():
             if symbol == 5:
                 dir = 'l'
                 type = 2
+            print("signal: [{},{} | {}]".format(int(parser[key]['X']), int(parser[key]['Y']), symbol))
             result['signal'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y']), 'type': type, 'dir': dir, 'signal': 'green'})
             result_key = result_key + 1
 
         for i in range(junction_count):
-            key = 'N{}'.format(i)
+            key = 'V{}'.format(i)
             symbol = int(parser[key]['S'])
-            print("vyhybka: ", symbol)
-            result['junction'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y'])})
+            print("vyhybka: [{},{} | {}]".format(int(parser[key]['X']), int(parser[key]['Y']), symbol))
+            type = 0
+            if symbol == 1:
+                type = 1
+            result['junction'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y']), 'type': type})
             result_key = result_key + 1
 
         print(json.dumps(result, sort_keys=True))
