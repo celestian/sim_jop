@@ -98,9 +98,14 @@ def main():
             key = 'V{}'.format(i)
             symbol = int(parser[key]['S'])
             print("vyhybka: [{},{} | {}]".format(int(parser[key]['X']), int(parser[key]['Y']), symbol))
-            type = 0
+            if symbol == 0:
+                type = 0
             if symbol == 1:
                 type = 1
+            if symbol == 2:
+                type = 2
+            if symbol == 3:
+                type = 3
             result['junction'].append({'key': result_key, 'x':int(parser[key]['X']), 'y': int(parser[key]['Y']), 'type': type})
             result_key = result_key + 1
 

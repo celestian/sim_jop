@@ -4,7 +4,28 @@ import {Line, Rect} from 'react-konva';
 class Junction extends React.Component {
     // zoom 2, w 12, h 18
     render() {
-        if (this.props.type === 1) {
+        if (this.props.type === 0) {
+            return (
+                <React.Fragment>
+                    <Line
+                      points={[
+                              this.props.x * 12, this.props.y * 18 + 9,
+                              this.props.x * 12 + 12, this.props.y * 18 + 9
+                          ]}
+                      strokeWidth={2}
+                      stroke="gray"
+                    />
+                    <Line
+                      points={[
+                              this.props.x * 12, this.props.y * 18 + 9,
+                              this.props.x * 12 + 6, this.props.y * 18
+                          ]}
+                      strokeWidth={2}
+                      stroke="gray"
+                    />
+                </React.Fragment>
+            );
+        } else if (this.props.type === 1) {
             return (
                 <React.Fragment>
                     <Line
@@ -25,7 +46,50 @@ class Junction extends React.Component {
                     />
                 </React.Fragment>
             );
+        } else if (this.props.type === 2) {
+            return (
+                <React.Fragment>
+                    <Line
+                      points={[
+                              this.props.x * 12, this.props.y * 18 + 9,
+                              this.props.x * 12 + 12, this.props.y * 18 + 9
+                          ]}
+                      strokeWidth={2}
+                      stroke="gray"
+                    />
+                    <Line
+                      points={[
+                              this.props.x * 12 + 12, this.props.y * 18 + 9,
+                              this.props.x * 12 + 6, this.props.y * 18
+                          ]}
+                      strokeWidth={2}
+                      stroke="gray"
+                    />
+                </React.Fragment>
+            );
+        } else if (this.props.type === 3) {
+            return (
+                <React.Fragment>
+                    <Line
+                      points={[
+                              this.props.x * 12, this.props.y * 18 + 9,
+                              this.props.x * 12 + 12, this.props.y * 18 + 9
+                          ]}
+                      strokeWidth={2}
+                      stroke="gray"
+                    />
+                    <Line
+                      points={[
+                              this.props.x * 12 + 12, this.props.y * 18 + 9,
+                              this.props.x * 12 + 6, this.props.y * 18 + 18
+                          ]}
+                      strokeWidth={2}
+                      stroke="gray"
+                    />
+                </React.Fragment>
+            );
         } else {
+            // this is not possible
             return (
                 <Rect
                 points={[
