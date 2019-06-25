@@ -38,16 +38,27 @@ class Track extends React.Component {
                 />
             );
         } else if (this.props.type === 16) {
-                return (
-                    <Line
-                      points={[
-                              this.props.x * 12, this.props.y * 18 + 9,
-                              this.props.x * 12 + this.props.length * 12, this.props.y * 18 + 9
-                          ]}
-                      strokeWidth={2}
-                      stroke="gray"
-                    />
-                );
+            return (
+                <Line
+                  points={[
+                          this.props.x * 12, this.props.y * 18 + 9,
+                          this.props.x * 12 + 6, this.props.y * 18 + 18
+                      ]}
+                  strokeWidth={2}
+                  stroke="gray"
+                />
+            );
+        } else if (this.props.type === 17) {
+            return (
+                <Line
+                  points={[
+                          this.props.x * 12 + 6, this.props.y * 18,
+                          this.props.x * 12 + 12, this.props.y * 18 + 9
+                      ]}
+                  strokeWidth={2}
+                  stroke="gray"
+                />
+            );
         } else if (this.props.type === 18) {
             return (
                 <React.Fragment>
@@ -57,7 +68,7 @@ class Track extends React.Component {
                                 this.props.x * 12 + 5, this.props.y * 18 + 9,
                             ]}
                         strokeWidth={2}
-                        stroke="grey"
+                        stroke="gray"
                     />
                     <Line
                         points={[
@@ -65,9 +76,20 @@ class Track extends React.Component {
                                 this.props.x * 12 + 12, this.props.y * 18 + 9,
                             ]}
                         strokeWidth={2}
-                        stroke="grey"
+                        stroke="gray"
                     />
                 </React.Fragment>
+            );
+        } else if (this.props.type === 21) {
+            return (
+                <Line
+                  points={[
+                          this.props.x * 12, this.props.y * 18 + 9,
+                          this.props.x * 12 + 6, this.props.y * 18
+                      ]}
+                  strokeWidth={2}
+                  stroke="gray"
+                />
             );
         } else {
             // this is not possible
