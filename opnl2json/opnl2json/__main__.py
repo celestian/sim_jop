@@ -65,10 +65,12 @@ def main():
                 # 12 je asi rovne => type = 1
                 # 14 je asi sikmo -> type = 2
                 type = 1
+                dir = None
                 if t == 14:
                     type = 2
+                    dir = 'lb-rt'
                     print("type 2", result_key)
-                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type})
+                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type, 'dir': dir})
                 result_key = result_key + 1
 
         for i in range(signal_count):
