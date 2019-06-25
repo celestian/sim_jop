@@ -72,6 +72,8 @@ def main():
                     type = 1
                 if t == 15:
                     type = 15
+                if t == 18:
+                    type = 18
                 print("kolej: [{},{} | {}]".format(x, y, t))
                 result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type})
                 result_key = result_key + 1

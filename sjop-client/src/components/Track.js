@@ -37,6 +37,27 @@ class Track extends React.Component {
                 stroke="gray"
                 />
             );
+        } else if (this.props.type === 18) {
+            return (
+                <React.Fragment>
+                    <Line
+                        points={[
+                                this.props.x * 12, this.props.y * 18 + 9,
+                                this.props.x * 12 + 5, this.props.y * 18 + 9,
+                            ]}
+                        strokeWidth={2}
+                        stroke="grey"
+                    />
+                    <Line
+                        points={[
+                                this.props.x * 12 + 8, this.props.y * 18 + 9,
+                                this.props.x * 12 + 12, this.props.y * 18 + 9,
+                            ]}
+                        strokeWidth={2}
+                        stroke="grey"
+                    />
+                </React.Fragment>
+            );
         } else {
             // this is not possible
             return (
