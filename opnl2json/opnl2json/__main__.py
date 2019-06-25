@@ -72,6 +72,7 @@ def main():
                 if t == 16:
                     type = 2
                     dir = 'lt-rb'
+                print("kolej: [{},{} | {}]".format(x, y, t))
                 result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type, 'dir': dir})
                 result_key = result_key + 1
 
