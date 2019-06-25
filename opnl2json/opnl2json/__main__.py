@@ -68,12 +68,12 @@ def main():
                 dir = None
                 if t == 14:
                     type = 2
-                    dir = 'lb-rt'
                 if t == 16:
-                    type = 2
-                    dir = 'lt-rb'
+                    type = 1
+                if t == 15:
+                    type = 15
                 print("kolej: [{},{} | {}]".format(x, y, t))
-                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type, 'dir': dir})
+                result['track'].append({'key': result_key, 'x': x, 'y': y, 'len': 1, 'type': type})
                 result_key = result_key + 1
 
         for i in range(signal_count):
