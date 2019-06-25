@@ -11,17 +11,17 @@ class Signal extends React.Component {
                 <Line
                     y={1}
                     points={this.props.dir === "r" ? [
-                        this.props.x * 12 - 9, this.props.y * 18 + 1,
-                        this.props.x * 12 - 2, this.props.y * 18 + 8,
-                        this.props.x * 12 - 9, this.props.y * 18 + 15,
-                        this.props.x * 12 - 10, this.props.y * 18 + 15,
-                        this.props.x * 12 - 10, this.props.y * 18 + 1
+                        (this.props.x + 1) * 12 - 9, this.props.y * 18 + 1,
+                        (this.props.x + 1) * 12 - 2, this.props.y * 18 + 8,
+                        (this.props.x + 1) * 12 - 9, this.props.y * 18 + 15,
+                        (this.props.x + 1) * 12 - 10, this.props.y * 18 + 15,
+                        (this.props.x + 1) * 12 - 10, this.props.y * 18 + 1
                     ] : this.props.dir === "l" ? [
-                        this.props.x * 12 - 3, this.props.y * 18 + 1,
-                        this.props.x * 12 - 10, this.props.y * 18 + 8,
-                        this.props.x * 12 - 3, this.props.y * 18 + 15,
-                        this.props.x * 12 - 2, this.props.y * 18 + 15,
-                        this.props.x * 12 - 2, this.props.y * 18 + 1
+                        (this.props.x + 1) * 12 - 3, this.props.y * 18 + 1,
+                        (this.props.x + 1) * 12 - 10, this.props.y * 18 + 8,
+                        (this.props.x + 1) * 12 - 3, this.props.y * 18 + 15,
+                        (this.props.x + 1) * 12 - 2, this.props.y * 18 + 15,
+                        (this.props.x + 1) * 12 - 2, this.props.y * 18 + 1
                     ] : ""}
                     fill={signal}
                     stroke={signal}
@@ -36,13 +36,13 @@ class Signal extends React.Component {
                 <Line
                     y={1}
                     points={this.props.dir === "r" ? [
-                        this.props.x * 12 - 10, this.props.y * 18 + 1,
-                        this.props.x * 12 - 2, this.props.y * 18 + 8,
-                        this.props.x * 12 - 10, this.props.y * 18 + 15
+                        (this.props.x + 1) * 12 - 10, this.props.y * 18 + 1,
+                        (this.props.x + 1) * 12 - 2, this.props.y * 18 + 8,
+                        (this.props.x + 1) * 12 - 10, this.props.y * 18 + 15
                     ] : this.props.dir === "l" ? [
-                        this.props.x * 12 - 2, this.props.y * 18 + 1,
-                        this.props.x * 12 - 10, this.props.y * 18 + 8,
-                        this.props.x * 12 - 2, this.props.y * 18 + 15
+                        (this.props.x + 1) * 12 - 2, this.props.y * 18 + 1,
+                        (this.props.x + 1) * 12 - 10, this.props.y * 18 + 8,
+                        (this.props.x + 1) * 12 - 2, this.props.y * 18 + 15
                     ] : ""}
                     stroke={signal}
                     strokeWidth={2}

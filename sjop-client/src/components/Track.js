@@ -42,10 +42,6 @@ class Track extends React.Component {
                 default:
                     return (
                         <Rect
-                        points={[
-                                this.props.x * 12, this.props.y * 18,
-                                this.props.x * 12, this.props.y * 18
-                            ]}
                         x={this.props.x * 12}
                         y={this.props.y * 18 + 4.5}
                         width={6}
