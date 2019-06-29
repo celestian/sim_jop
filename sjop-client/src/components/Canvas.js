@@ -63,7 +63,7 @@ class Canvas extends React.Component {
                 <Stage width={this.state.stageWidth} height={this.state.stageHeight} onMouseMove={this.getMouseCoords.bind(this.getMouseCoords)}>
                     <Layer>
                         {data['track'].map(i => (
-                            <Track key={i.key} x={i.x} y={i.y} length={i.len ? i.len : 0} type={i.type}/>
+                            <Track key={i.key} x={i.x} y={i.y} type={i.type}/>
                         ))}
                         {data['signal'].map(i => (
                             <Signal key={i.key} x={i.x} y={i.y} type={i.type} dir={i.dir} signal={i.signal}/>
