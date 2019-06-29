@@ -4,13 +4,18 @@ import {Line, Rect} from 'react-konva';
 class Track extends React.Component {
     // zoom 2, w 12, h 18
     render() {
+
+        const point_a = this.props.x * 12;
+        const point_b = point_a + 6;
+        const point_c = point_a + 12;
+        const point_d = this.props.y * 18;
+        const point_e = point_d + 9;
+        const point_f = point_d + 18;
+
         if (this.props.type === 12) {
             return (
                 <Line
-                  points={[
-                          this.props.x * 12, this.props.y * 18 + 9,
-                          this.props.x * 12 + this.props.length * 12, this.props.y * 18 + 9
-                      ]}
+                  points={[point_a, point_e, point_c, point_e]}
                   strokeWidth={2}
                   stroke="gray"
                 />
@@ -18,10 +23,7 @@ class Track extends React.Component {
         } else if (this.props.type === 14) {
             return (
                 <Line
-                points={[
-                        this.props.x * 12 + 12, this.props.y * 18 + 9,
-                        this.props.x * 12 + 6, this.props.y * 18 + 18
-                    ]}
+                points={[point_c, point_e, point_b, point_f]}
                 strokeWidth={2}
                 stroke="gray"
                 />
@@ -29,10 +31,7 @@ class Track extends React.Component {
         } else if (this.props.type === 15) {
             return (
                 <Line
-                points={[
-                        this.props.x * 12, this.props.y * 18 + 9,
-                        this.props.x * 12 + 6, this.props.y * 18
-                    ]}
+                points={[point_a, point_e, point_b,point_d]}
                 strokeWidth={2}
                 stroke="gray"
                 />
@@ -40,10 +39,7 @@ class Track extends React.Component {
         } else if (this.props.type === 16) {
             return (
                 <Line
-                  points={[
-                          this.props.x * 12, this.props.y * 18 + 9,
-                          this.props.x * 12 + 6, this.props.y * 18 + 18
-                      ]}
+                  points={[point_a, point_e, point_b, point_f]}
                   strokeWidth={2}
                   stroke="gray"
                 />
@@ -51,10 +47,7 @@ class Track extends React.Component {
         } else if (this.props.type === 17) {
             return (
                 <Line
-                  points={[
-                          this.props.x * 12 + 6, this.props.y * 18,
-                          this.props.x * 12 + 12, this.props.y * 18 + 9
-                      ]}
+                  points={[point_b,point_d, point_c, point_e]}
                   strokeWidth={2}
                   stroke="gray"
                 />
@@ -63,18 +56,12 @@ class Track extends React.Component {
             return (
                 <React.Fragment>
                     <Line
-                        points={[
-                                this.props.x * 12, this.props.y * 18 + 9,
-                                this.props.x * 12 + 5, this.props.y * 18 + 9,
-                            ]}
+                        points={[point_a, point_e, this.props.x * 12 + 5, point_e]}
                         strokeWidth={2}
                         stroke="gray"
                     />
                     <Line
-                        points={[
-                                this.props.x * 12 + 8, this.props.y * 18 + 9,
-                                this.props.x * 12 + 12, this.props.y * 18 + 9,
-                            ]}
+                        points={[this.props.x * 12 + 8, point_e, point_c, point_e]}
                         strokeWidth={2}
                         stroke="gray"
                     />
@@ -83,10 +70,7 @@ class Track extends React.Component {
         } else if (this.props.type === 21) {
             return (
                 <Line
-                  points={[
-                          this.props.x * 12, this.props.y * 18 + 9,
-                          this.props.x * 12 + 6, this.props.y * 18
-                      ]}
+                  points={[point_a, point_e, point_b,point_d]}
                   strokeWidth={2}
                   stroke="gray"
                 />
@@ -95,10 +79,7 @@ class Track extends React.Component {
             // this is not possible
             return (
                 <Rect
-                points={[
-                        this.props.x * 12, this.props.y * 18,
-                        this.props.x * 12, this.props.y * 18
-                    ]}
+                points={[point_a,point_d,point_a,point_d]}
                 x={this.props.x * 12}
                 y={this.props.y * 18 + 4.5}
                 width={6}
