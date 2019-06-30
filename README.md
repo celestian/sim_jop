@@ -34,6 +34,7 @@ If you want to be in touch with the community, please connect to [discord](https
 #### Python
 - [Flask](http://flask.pocoo.org/)
 - [eventlet](http://eventlet.net/)
+- [python-socketio](https://python-socketio.readthedocs.io/en/latest/index.html)
 - [Flask-SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
 
 #### React
