@@ -6,18 +6,18 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="opnl2json",
+    name="sjop-server",
     version="0.0.1",
     author="celestian",
     author_email="petr.celestian@gmail.com",
-    description="Converter for opnl to json file format",
+    description="sim_jop server",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/celestian/sim_jop",
     packages=setuptools.find_packages(),
     entry_points={
         'console_scripts': [
-            'opnl2json = opnl2json.__main__:main'
+            'sjop-server = sjop-server.__main__:main'
         ]
     },
     classifiers=[
