@@ -1,7 +1,7 @@
-FROM alpine:latest
+FROM mhart/alpine-node
 MAINTAINER celestian "petr.celestian@gmail.com"
 
-RUN apk add --no-cache bash nodejs
+RUN apk add --no-cache bash
 
 COPY . /app
 WORKDIR /app
