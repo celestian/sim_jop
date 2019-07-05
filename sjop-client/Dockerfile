@@ -1,14 +1,11 @@
-FROM mhart/alpine-node
+FROM mhart/alpine-node AS builder
 MAINTAINER celestian "petr.celestian@gmail.com"
-
-RUN apk add --no-cache bash
-
 COPY . /app
 WORKDIR /app
+RUN npm run build
 
-RUN docker/build.sh
-
-EXPOSE 5000
-
-
-ENTRYPOINT ["docker/entrypoint.sh"]
+FROM mhart/alpine-node
+RUN npm --global add serve
+WORKDIR /app
+COPY --from=builder /app/build .
+CMD ["serve", "-p", "8080", "-s", "."]
